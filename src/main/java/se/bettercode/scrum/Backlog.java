@@ -7,12 +7,8 @@ public class Backlog {
 
     List<Story> stories = new ArrayList<Story>();
 
-    public Backlog() {
-        stories.add(new Story(3));
-        stories.add(new Story(5));
-        stories.add(new Story(8));
-        stories.add(new Story(5));
-        stories.add(new Story(1));
+    public void addStory(Story story) {
+        stories.add(story);
     }
 
     public Story getStory() {
