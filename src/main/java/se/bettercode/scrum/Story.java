@@ -43,7 +43,7 @@ public class Story {
 
         if (pointsDone > totalPoints) {
             pointsDone = totalPoints;
-            return pointsDone - totalPoints;
+            return points - totalPoints;
         } else {
             return 0;
         }
