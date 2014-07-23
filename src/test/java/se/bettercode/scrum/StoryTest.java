@@ -66,5 +66,16 @@ public class StoryTest extends TestCase {
         assertEquals("Story{points=5, pointsDone=0, status=TODO}", story.toString());
     }
 
+    public void testStoryWithNegativePoints() {
+        Throwable e = null;
+
+        try {
+            story = new Story(-1);
+        } catch (Throwable ex) {
+            e = ex;
+        }
+
+        assertTrue(e instanceof AssertionError);
+    }
 
 }

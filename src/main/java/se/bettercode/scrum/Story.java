@@ -23,6 +23,7 @@ public class Story {
     private StoryState status = StoryState.TODO;
 
     public Story(int points) {
+        assert (points >= 0) : "Points must not be a negative value.";
         totalPoints = points;
     }
 
