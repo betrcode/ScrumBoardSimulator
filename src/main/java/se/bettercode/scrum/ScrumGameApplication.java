@@ -11,11 +11,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 
 public class ScrumGameApplication extends Application {
 
     Label response;
-
+    GridPane gridPane;
 
     public static void main(String[] args) {
         System.out.println("Launching JavaFX application.");
@@ -43,7 +45,7 @@ public class ScrumGameApplication extends Application {
     }
 
     private GridPane getGridPane() {
-        GridPane gridPane = new GridPane();
+        gridPane = new GridPane();
         gridPane.setAlignment(Pos.TOP_CENTER);
         gridPane.setGridLinesVisible(true);
 
@@ -90,6 +92,18 @@ public class ScrumGameApplication extends Application {
         return gridPane;
     }
 
+    private void addCardsToBoard() {
+        //Add some pretend cards?
+        ArrayList listOfCards = new ArrayList();
+        for (int i=1; i<10; i++) {
+            Label card = new Label("Card" + i);
+            listOfCards.add(card);
+            GridPane.setConstraints(card, 0, i);
+        }
+
+        gridPane.getChildren().addAll(listOfCards);
+    }
+
     public HBox getToolbar() {
         HBox hbox = new HBox();
         hbox.setPadding(new Insets(15, 12, 15, 12));
@@ -105,6 +119,7 @@ public class ScrumGameApplication extends Application {
         loadButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                addCardsToBoard();
                 loadButton.setDisable(true);
             }
         });
