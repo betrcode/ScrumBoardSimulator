@@ -4,8 +4,10 @@ package se.bettercode.scrum;/**
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
+
 
 public class ScrumGameApplication extends Application {
 
@@ -27,6 +29,10 @@ public class ScrumGameApplication extends Application {
         FlowPane rootNode = new FlowPane();
         Scene myScene = new Scene(rootNode, 300, 200);
         primaryStage.setScene(myScene);
+
+        Label myLabel = new Label("This is the Scrum Game");
+        rootNode.getChildren().add(myLabel);
+
         primaryStage.show();
 
     }
