@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class ScrumGameApplication extends Application {
 
-    Label response;
     GridPane gridPane;
 
     Sprint sprint;
@@ -46,6 +45,7 @@ public class ScrumGameApplication extends Application {
         GridPane gridPane = getGridPane();
         borderPane.setCenter(gridPane);
         borderPane.setTop(getToolbar());
+        borderPane.setBottom(getStatusBar());
         Scene myScene = new Scene(borderPane, 800, 600);
         primaryStage.setScene(myScene);
 
@@ -76,34 +76,12 @@ public class ScrumGameApplication extends Application {
         Label todo = new Label(Story.StoryState.TODO.toString());
         Label doing = new Label(Story.StoryState.STARTED.toString());
         Label done = new Label(Story.StoryState.FINISHED.toString());
-        response = new Label("Push a button");
-
-        Button btnAlpha = new Button("Alpha");
-        Button btnBeta = new Button("Beta");
 
         GridPane.setConstraints(todo, 0, 0);
         GridPane.setConstraints(doing, 1, 0);
         GridPane.setConstraints(done, 2, 0);
 
-        GridPane.setConstraints(btnAlpha, 1, 2);
-        GridPane.setConstraints(btnBeta, 2, 2);
-        GridPane.setConstraints(response, 1, 3);
-
-        btnAlpha.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                response.setText("Alpha was pressed.");
-            }
-        });
-
-        btnBeta.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                response.setText("Beta was pressed.");
-            }
-        });
-
-        gridPane.getChildren().addAll(btnAlpha, btnBeta, response, todo, doing, done);
+        gridPane.getChildren().addAll(todo, doing, done);
 
         return gridPane;
     }
@@ -123,7 +101,7 @@ public class ScrumGameApplication extends Application {
         gridPane.getChildren().addAll(listOfCards);
     }
 
-    public HBox getToolbar() {
+    private HBox getToolbar() {
         HBox hbox = new HBox();
         hbox.setPadding(new Insets(15, 12, 15, 12));
         hbox.setSpacing(10);
@@ -144,6 +122,21 @@ public class ScrumGameApplication extends Application {
         });
 
         hbox.getChildren().addAll(loadButton, startButton);
+
+        return hbox;
+    }
+
+    private HBox getStatusBar() {
+        HBox hbox = new HBox();
+        hbox.setPadding(new Insets(15, 12, 15, 12));
+        hbox.setSpacing(10);
+        hbox.setStyle("-fx-background-color: #557799;");
+
+        Label teamName = new Label("Team: " + team.getName());
+        Label teamVelocity = new Label("Velocity: " + team.getVelocity());
+        Label storyPointsDone = new Label("Story points done: " + backlog.getFinishedPoints() + "/" + backlog.getTotalPoints());
+
+        hbox.getChildren().addAll(teamName, teamVelocity, storyPointsDone);
 
         return hbox;
     }
