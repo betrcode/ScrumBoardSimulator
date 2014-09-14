@@ -19,6 +19,10 @@ public class ScrumGameApplication extends Application {
     Label response;
     GridPane gridPane;
 
+    Sprint sprint;
+    Team team;
+    Backlog backlog;
+
     public static void main(String[] args) {
         System.out.println("Launching JavaFX application.");
         launch(args);
@@ -33,6 +37,8 @@ public class ScrumGameApplication extends Application {
     public void start(Stage primaryStage) {
 
         System.out.println("Inside start()");
+        initScrum();
+
         primaryStage.setTitle("Scrum Game");
         BorderPane borderPane = new BorderPane();
         GridPane gridPane = getGridPane();
@@ -42,6 +48,14 @@ public class ScrumGameApplication extends Application {
         primaryStage.setScene(myScene);
 
         primaryStage.show();
+    }
+
+    private void initScrum() {
+        sprint = new Sprint("First sprint", 10);
+        team = new Team("The Cobras", 23);
+        backlog = new SmallBacklog();
+        sprint.setTeam(team);
+        sprint.setBacklog(backlog);
     }
 
     private GridPane getGridPane() {
@@ -95,10 +109,12 @@ public class ScrumGameApplication extends Application {
     private void addCardsToBoard() {
         //Add some pretend cards?
         ArrayList listOfCards = new ArrayList();
-        for (int i=1; i<10; i++) {
-            Label card = new Label("Card" + i);
+        int i = 1;
+        for (Story story: backlog.getStories()) {
+            Label card = new Label(story.getTitle() + " " + "(" + story.getTotalPoints() + ")");
             listOfCards.add(card);
             GridPane.setConstraints(card, 0, i);
+            i++;
         }
 
         gridPane.getChildren().addAll(listOfCards);

@@ -20,6 +20,10 @@ public class Backlog {
         return null; // BAH
     }
 
+    public List<Story> getStories() {
+        return stories;
+    }
+
     public int getFinishedPoints() {
         int total = 0;
         for (Story story : stories) {

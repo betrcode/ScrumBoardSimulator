@@ -3,28 +3,36 @@ package se.bettercode.scrum;
 public class Story {
 
     public enum StoryState {TODO, STARTED, FINISHED}
+    private int totalPoints;
+    private int pointsDone = 0;
+    private StoryState status = StoryState.TODO;
+    private String title = "";
+
+    public Story(int points) {
+        this(points, "");
+    }
+
+    public Story(int points, String title) {
+        assert (points >= 0) : "Points must not be a negative value.";
+        this.title = title;
+        totalPoints = points;
+    }
 
     public int getTotalPoints() {
         return totalPoints;
     }
-
-    private int totalPoints;
-
     public int getPointsDone() {
         return pointsDone;
     }
-
-    private int pointsDone = 0;
-
     public StoryState getStatus() {
         return status;
     }
+    public String getTitle() {
+        return title;
+    }
 
-    private StoryState status = StoryState.TODO;
-
-    public Story(int points) {
-        assert (points >= 0) : "Points must not be a negative value.";
-        totalPoints = points;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
@@ -33,6 +41,7 @@ public class Story {
      * @return any leftover points
      */
     public int workOnStory(int points) {
+        System.out.println("Working on story: " + this.getTitle());
         status = StoryState.STARTED;
 
 
@@ -40,6 +49,7 @@ public class Story {
 
         if (pointsDone >= totalPoints) {
             status = StoryState.FINISHED;
+            System.out.println("Finished story: " + this.getTitle());
         }
 
         if (pointsDone > totalPoints) {
