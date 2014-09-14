@@ -1,10 +1,6 @@
 package se.bettercode.scrum;
 
 import javafx.application.Application;
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,8 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -23,6 +17,18 @@ import java.util.ArrayList;
 public class ScrumGameApplication extends Application {
 
     GridPane gridPane;
+
+    public Sprint getSprint() {
+        return sprint;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public Backlog getBacklog() {
+        return backlog;
+    }
 
     Sprint sprint;
     Team team;
@@ -46,13 +52,10 @@ public class ScrumGameApplication extends Application {
 
         primaryStage.setTitle("Scrum Game");
         BorderPane borderPane = new BorderPane();
-        GridPane gridPane = getGridPane();
-        borderPane.setCenter(gridPane);
-        borderPane.setTop(getToolbar());
-        borderPane.setBottom(getStatusBar());
-        Scene myScene = new Scene(borderPane, 800, 600);
-        primaryStage.setScene(myScene);
-
+        borderPane.setCenter(makeGridPane());
+        borderPane.setTop(makeToolBar());
+        borderPane.setBottom(makeStatusBar());
+        primaryStage.setScene(new Scene(borderPane, 800, 600));
         primaryStage.show();
     }
 
@@ -64,7 +67,7 @@ public class ScrumGameApplication extends Application {
         sprint.setBacklog(backlog);
     }
 
-    private GridPane getGridPane() {
+    private GridPane makeGridPane() {
         gridPane = new GridPane();
         gridPane.setAlignment(Pos.TOP_CENTER);
         gridPane.setGridLinesVisible(true);
@@ -105,7 +108,7 @@ public class ScrumGameApplication extends Application {
         gridPane.getChildren().addAll(listOfCards);
     }
 
-    private HBox getToolbar() {
+    private HBox makeToolBar() {
         HBox hbox = new HBox();
         hbox.setPadding(new Insets(15, 12, 15, 12));
         hbox.setSpacing(10);
@@ -135,7 +138,7 @@ public class ScrumGameApplication extends Application {
         return hbox;
     }
 
-    private HBox getStatusBar() {
+    private HBox makeStatusBar() {
         HBox hbox = new HBox();
         hbox.setPadding(new Insets(15, 12, 15, 12));
         hbox.setSpacing(10);
