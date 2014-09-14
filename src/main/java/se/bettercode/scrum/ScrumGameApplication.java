@@ -46,10 +46,7 @@ public class ScrumGameApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
         System.out.println("Inside start()");
-        initScrum();
-
         primaryStage.setTitle("Scrum Game");
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(makeGridPane());
@@ -93,6 +90,11 @@ public class ScrumGameApplication extends Application {
         return gridPane;
     }
 
+    private void loadData() {
+        initScrum();
+        addCardsToBoard();
+    }
+
     private void addCardsToBoard() {
         ArrayList listOfCards = new ArrayList();
         int i = 1;
@@ -123,7 +125,7 @@ public class ScrumGameApplication extends Application {
         loadButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                addCardsToBoard();
+                loadData();
                 loadButton.setDisable(true);
             }
         });
@@ -144,9 +146,9 @@ public class ScrumGameApplication extends Application {
         hbox.setSpacing(10);
         hbox.setStyle("-fx-background-color: #557799;");
 
-        Label teamName = new Label("Team: " + team.getName());
-        Label teamVelocity = new Label("Velocity: " + team.getVelocity());
-        Label storyPointsDone = new Label("Story points done: " + backlog.getFinishedPoints() + "/" + backlog.getTotalPoints());
+        Label teamName = new Label("Team: ");
+        Label teamVelocity = new Label("Velocity: ");
+        Label storyPointsDone = new Label("Story points done: ");
         //storyPointsDone.textProperty().bind(storiesDone);
 
         hbox.getChildren().addAll(teamName, teamVelocity, storyPointsDone);
