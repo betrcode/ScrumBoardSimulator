@@ -23,11 +23,9 @@ public class RandomStoryTitleGenerator {
     public ArrayList<String> generate(int n) {
         String title;
         ArrayList<String> nRandomTitles = new ArrayList<String>();
-        System.out.println("Generating random titles...");
         while (nRandomTitles.size() < n) {
             title = this.generateOne();
             if (!isStringInList(title, nRandomTitles)) {
-                System.out.println("Generated unique title: " + title);
                 nRandomTitles.add(title);
             }
         }
