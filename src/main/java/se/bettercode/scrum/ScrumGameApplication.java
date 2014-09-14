@@ -1,6 +1,10 @@
 package se.bettercode.scrum;
 
 import javafx.application.Application;
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -121,6 +125,11 @@ public class ScrumGameApplication extends Application {
             }
         });
 
+        startButton.setOnAction((event) -> {
+            sprint.runSprint();
+            startButton.setDisable(true);
+        });
+
         hbox.getChildren().addAll(loadButton, startButton);
 
         return hbox;
@@ -135,6 +144,7 @@ public class ScrumGameApplication extends Application {
         Label teamName = new Label("Team: " + team.getName());
         Label teamVelocity = new Label("Velocity: " + team.getVelocity());
         Label storyPointsDone = new Label("Story points done: " + backlog.getFinishedPoints() + "/" + backlog.getTotalPoints());
+        //storyPointsDone.textProperty().bind(storiesDone);
 
         hbox.getChildren().addAll(teamName, teamVelocity, storyPointsDone);
 
