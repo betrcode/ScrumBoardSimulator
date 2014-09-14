@@ -41,7 +41,7 @@ public class Story {
      * @return any leftover points
      */
     public int workOnStory(int points) {
-        System.out.println("Working on story: " + this.getTitle());
+        //System.out.println("Working on story: " + this.getTitle());
         status = StoryState.STARTED;
 
 
@@ -49,7 +49,7 @@ public class Story {
 
         if (pointsDone >= totalPoints) {
             status = StoryState.FINISHED;
-            System.out.println("Finished story: " + this.getTitle());
+            //System.out.println("Finished story: " + this.getTitle());
         }
 
         if (pointsDone > totalPoints) {
