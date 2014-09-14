@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -71,9 +73,9 @@ public class ScrumGameApplication extends Application {
         column3.setPercentWidth(33);
         gridPane.getColumnConstraints().addAll(column1, column2, column3);
 
-        Label todo = new Label("TODO");
-        Label doing = new Label("DOING");
-        Label done = new Label("DONE");
+        Label todo = new Label(Story.StoryState.TODO.toString());
+        Label doing = new Label(Story.StoryState.STARTED.toString());
+        Label done = new Label(Story.StoryState.FINISHED.toString());
         response = new Label("Push a button");
 
         Button btnAlpha = new Button("Alpha");
@@ -107,11 +109,12 @@ public class ScrumGameApplication extends Application {
     }
 
     private void addCardsToBoard() {
-        //Add some pretend cards?
         ArrayList listOfCards = new ArrayList();
         int i = 1;
         for (Story story: backlog.getStories()) {
             Label card = new Label(story.getTitle() + " " + "(" + story.getTotalPoints() + ")");
+            //card.setTextFill(Color.web("#0076a3"));
+            card.setStyle("-fx-background-color:rgba(85, 255, 68,0.7)");
             listOfCards.add(card);
             GridPane.setConstraints(card, 0, i);
             i++;
