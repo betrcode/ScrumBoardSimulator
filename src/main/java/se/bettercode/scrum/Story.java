@@ -1,13 +1,16 @@
 package se.bettercode.scrum;
 
+import javafx.beans.property.StringProperty;
+
 public class Story {
 
-    public enum StoryState {TODO, STARTED, FINISHED}
+
+
+    public enum StoryState {TODO, STARTED, FINISHED;}
     private int totalPoints;
     private int pointsDone = 0;
-    private StoryState status = StoryState.TODO;
+    private StoryStateProperty status = new StoryStateProperty();
     private String title = "";
-
     public Story(int points) {
         this(points, "");
     }
@@ -18,6 +21,10 @@ public class Story {
         totalPoints = points;
     }
 
+    public StoryStateProperty statusProperty() {
+        return status;
+    }
+
     public int getTotalPoints() {
         return totalPoints;
     }
@@ -25,7 +32,7 @@ public class Story {
         return pointsDone;
     }
     public StoryState getStatus() {
-        return status;
+        return status.getState();
     }
     public String getTitle() {
         return title;
@@ -42,13 +49,13 @@ public class Story {
      */
     public int workOnStory(int points) {
         //System.out.println("Working on story: " + this.getTitle());
-        status = StoryState.STARTED;
+        status.setState(StoryState.STARTED);
 
 
         pointsDone += points;
 
         if (pointsDone >= totalPoints) {
-            status = StoryState.FINISHED;
+            status.setState(StoryState.FINISHED);
             //System.out.println("Finished story: " + this.getTitle());
         }
 

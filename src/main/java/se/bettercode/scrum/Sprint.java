@@ -77,7 +77,7 @@ public class Sprint {
                     int dailyBurn = getDailyBurnrate();
                     boolean haveWorkRemaining = backlog.runDay(dailyBurn);
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

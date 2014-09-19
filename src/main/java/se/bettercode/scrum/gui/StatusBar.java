@@ -26,8 +26,8 @@ public class StatusBar extends HBox {
         setStyle("-fx-background-color: #557799;");
         getChildren().addAll(new Label("Team: "), teamNameLabel,
                              new Label("Velocity: "), teamVelocityLabel,
-                             new Label("Day: "), currentDayLabel,
                              new Label("Story points done: "), storyPointsDoneLabel,
+                             new Label("Day: "), currentDayLabel,
                              progressBar);
     }
 
