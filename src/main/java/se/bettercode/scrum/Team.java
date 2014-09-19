@@ -15,7 +15,7 @@ public class Team {
         this.velocity = new SimpleIntegerProperty(velocity);
     }
 
-    public final StringProperty getName() {
+    public final StringProperty nameProperty() {
         return this.name;
     }
 
@@ -23,7 +23,7 @@ public class Team {
         this.name.setValue(name);
     }
 
-    public final IntegerProperty getVelocity() {
+    public final IntegerProperty velocityProperty() {
         return velocity;
     }
 

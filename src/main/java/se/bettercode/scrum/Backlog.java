@@ -1,5 +1,6 @@
 package se.bettercode.scrum;
 
+import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public class Backlog {
 
     List<Story> stories = new ArrayList<Story>();
-    IntegerProperty finishedPoints = new SimpleIntegerProperty(0);
+    IntegerProperty donePoints = new SimpleIntegerProperty(0);
 
     public void addStory(Story story) {
         stories.add(story);
@@ -28,12 +29,12 @@ public class Backlog {
         return stories;
     }
 
-    public IntegerProperty getFinishedPoints() {
-        return finishedPoints;
+    public IntegerProperty getDonePoints() {
+        return donePoints;
     }
 
-    public IntegerProperty finishedPointsProperty() {
-        return finishedPoints;
+    public IntegerProperty donePointsProperty() {
+        return donePoints;
     }
 
     public int calculateFinishedPoints() {
@@ -95,7 +96,11 @@ public class Backlog {
             }
         }
 
-        finishedPoints.set(calculateFinishedPoints());
+        setFinishedPoints();
         return haveWorkRemaining;
+    }
+
+    private void setFinishedPoints() {
+        Platform.runLater(() -> donePoints.set(calculateFinishedPoints()));
     }
 }

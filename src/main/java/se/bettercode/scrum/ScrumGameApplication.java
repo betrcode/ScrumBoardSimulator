@@ -1,7 +1,6 @@
 package se.bettercode.scrum;
 
 import javafx.application.Application;
-import javafx.beans.binding.StringBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -69,9 +68,10 @@ public class ScrumGameApplication extends Application {
     }
 
     private void bindStuff() {
-        statusBar.bindTeamName(team.getName());
-        statusBar.bindTeamVelocity(team.getVelocity());
-        statusBar.bindStoryPointsDone(backlog.getFinishedPoints());
+        statusBar.bindTeamName(team.nameProperty());
+        statusBar.bindTeamVelocity(team.velocityProperty());
+        statusBar.bindStoryPointsDone(backlog.donePointsProperty());
+        statusBar.bindCurrentDay(sprint.currentDayProperty());
     }
 
     private GridPane makeGridPane() {
@@ -147,24 +147,6 @@ public class ScrumGameApplication extends Application {
         });
 
         hbox.getChildren().addAll(loadButton, startButton);
-
-        return hbox;
-    }
-
-    private HBox makeStatusBar() {
-        HBox hbox = new HBox();
-        hbox.setPadding(new Insets(15, 12, 15, 12));
-        hbox.setSpacing(10);
-        hbox.setStyle("-fx-background-color: #557799;");
-
-        Label teamName = new Label("Team: ");
-        Label teamVelocity = new Label("Velocity: ");
-        Label storyPointsDone = new Label("Story points done: ");
-        //storyPointsDone.textProperty().bind(storiesDone);
-        teamName.textProperty().bind(team.getName());
-        //StringBinding label = team.name.;
-
-        hbox.getChildren().addAll(teamName, teamVelocity, storyPointsDone);
 
         return hbox;
     }
