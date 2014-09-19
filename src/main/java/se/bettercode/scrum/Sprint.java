@@ -1,20 +1,31 @@
 package se.bettercode.scrum;
 
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Sprint {
 
     private String name;
-    private int lengthInDays;
+    private IntegerProperty lengthInDays = new SimpleIntegerProperty(0);
     private Team team;
     private Backlog backlog;
     private IntegerProperty currentDay = new SimpleIntegerProperty(0);
+    private BooleanProperty running = new SimpleBooleanProperty(false);
 
     public Sprint(String name, int lengthInDays) {
         this.name = name;
-        this.lengthInDays = lengthInDays;
+        this.lengthInDays.set(lengthInDays);
+    }
+
+    public int getLengthInDays() {
+        return lengthInDays.get();
+    }
+
+    public IntegerProperty lengthInDaysProperty() {
+        return lengthInDays;
     }
 
     public void setTeam(Team team) {
@@ -26,7 +37,7 @@ public class Sprint {
     }
 
     public int getDailyBurnrate() {
-        return team.velocityProperty().get() / lengthInDays;
+        return team.velocityProperty().get() / lengthInDays.get();
     }
 
     public int getCurrentDay() {
@@ -37,6 +48,14 @@ public class Sprint {
         return currentDay;
     }
 
+    public boolean getRunning() {
+        return running.get();
+    }
+
+    public BooleanProperty runningProperty() {
+        return running;
+    }
+
     public void runSprint() {
         new Thread() {
 
@@ -44,12 +63,15 @@ public class Sprint {
             public void run() {
                 assert team != null : "Team is null";
                 assert backlog != null : "Backlog is null";
-                System.out.println("Running Sprint simulation with team \"" + team.nameProperty() + "\" (velocity " + team.velocityProperty() + ") for Sprint \"" + name + "\" for " + lengthInDays + " days...");
+
+                setRunning(true);
+
+                System.out.println("Running Sprint simulation with team \"" + team.nameProperty() + "\" (velocity " + team.velocityProperty() + ") for Sprint \"" + name + "\" for " + lengthInDays.get() + " days...");
                 System.out.println(backlog);
                 System.out.println("Total backlog size is " + backlog.getTotalPoints() + " points.");
                 System.out.println("Burning through backlog at " + getDailyBurnrate() + " points per day.");
 
-                for (int day=0; day<=lengthInDays; day++) {
+                for (int day=0; day<=lengthInDays.get(); day++) {
                     setCurrentDay(day);
                     System.out.println("Day " + day + ": " + backlog.getFinishedStoriesCount() + " finished stories in total.");
                     int dailyBurn = getDailyBurnrate();
@@ -63,6 +85,7 @@ public class Sprint {
                         break;
                     }
                 }
+                setRunning(false);
                 System.out.println(backlog);
                 System.out.println("A total of " + backlog.calculateFinishedPoints() + " points have been finished!");
                 System.out.println("Wasted " + backlog.getWorkInProgressPoints() + " points");
@@ -73,6 +96,10 @@ public class Sprint {
 
     private void setCurrentDay(int day) {
         Platform.runLater(() -> {currentDay.set(day);});
+    }
+
+    private void setRunning(boolean running) {
+        Platform.runLater(() -> this.running.set(running));
     }
 
 }

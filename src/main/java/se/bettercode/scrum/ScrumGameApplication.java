@@ -1,16 +1,15 @@
 package se.bettercode.scrum;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import se.bettercode.scrum.gui.StatusBar;
+import se.bettercode.scrum.gui.ToolBar;
 
 import java.util.ArrayList;
 
@@ -36,6 +35,7 @@ public class ScrumGameApplication extends Application {
     Backlog backlog;
 
     StatusBar statusBar = new StatusBar();
+    ToolBar toolBar = new ToolBar();
 
     public static void main(String[] args) {
         System.out.println("Launching JavaFX application.");
@@ -53,25 +53,36 @@ public class ScrumGameApplication extends Application {
         primaryStage.setTitle("Scrum Game");
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(makeGridPane());
-        borderPane.setTop(makeToolBar());
+        borderPane.setTop(toolBar);
         borderPane.setBottom(statusBar);
         primaryStage.setScene(new Scene(borderPane, 800, 600));
+
+        bindActionsToToolBar();
+
         primaryStage.show();
     }
 
-    private void initScrum() {
+    private void initSprint() {
         sprint = new Sprint("First sprint", 10);
         team = new Team("The Cobras", 23);
         backlog = new SmallBacklog();
         sprint.setTeam(team);
         sprint.setBacklog(backlog);
+
+        toolBar.bindRunningProperty(sprint.runningProperty());
     }
 
-    private void bindStuff() {
+    private void bindSprintDataToStatusBar() {
         statusBar.bindTeamName(team.nameProperty());
         statusBar.bindTeamVelocity(team.velocityProperty());
         statusBar.bindStoryPointsDone(backlog.donePointsProperty());
+        statusBar.bindDaysInSprint(sprint.lengthInDaysProperty());
         statusBar.bindCurrentDay(sprint.currentDayProperty());
+    }
+
+    private void bindActionsToToolBar() {
+        toolBar.setLoadButtonAction(event -> loadData());
+        toolBar.setStartButtonAction((event) -> sprint.runSprint());
     }
 
     private GridPane makeGridPane() {
@@ -101,8 +112,8 @@ public class ScrumGameApplication extends Application {
     }
 
     private void loadData() {
-        initScrum();
-        bindStuff();
+        initSprint();
+        bindSprintDataToStatusBar();
         addCardsToBoard();
     }
 
@@ -117,40 +128,8 @@ public class ScrumGameApplication extends Application {
             GridPane.setConstraints(card, 0, i);
             i++;
         }
-
         gridPane.getChildren().addAll(listOfCards);
     }
-
-    private HBox makeToolBar() {
-        HBox hbox = new HBox();
-        hbox.setPadding(new Insets(15, 12, 15, 12));
-        hbox.setSpacing(10);
-        hbox.setStyle("-fx-background-color: #336699;");
-
-        final Button loadButton = new Button("Load board");
-        loadButton.setPrefSize(100, 20);
-
-        Button startButton = new Button("Start Sprint");
-        startButton.setPrefSize(100, 20);
-
-        loadButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                loadData();
-                loadButton.setDisable(true);
-            }
-        });
-
-        startButton.setOnAction((event) -> {
-            sprint.runSprint();
-            startButton.setDisable(true);
-        });
-
-        hbox.getChildren().addAll(loadButton, startButton);
-
-        return hbox;
-    }
-
 
     public void stop() {
         System.out.println("Inside stop()");
