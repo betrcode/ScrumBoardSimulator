@@ -1,6 +1,7 @@
 package se.bettercode.scrum;
 
 import javafx.application.Application;
+import javafx.beans.binding.StringBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import se.bettercode.scrum.gui.StatusBar;
 
 import java.util.ArrayList;
 
@@ -34,6 +36,8 @@ public class ScrumGameApplication extends Application {
     Team team;
     Backlog backlog;
 
+    StatusBar statusBar = new StatusBar();
+
     public static void main(String[] args) {
         System.out.println("Launching JavaFX application.");
         launch(args);
@@ -51,7 +55,7 @@ public class ScrumGameApplication extends Application {
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(makeGridPane());
         borderPane.setTop(makeToolBar());
-        borderPane.setBottom(makeStatusBar());
+        borderPane.setBottom(statusBar);
         primaryStage.setScene(new Scene(borderPane, 800, 600));
         primaryStage.show();
     }
@@ -62,6 +66,12 @@ public class ScrumGameApplication extends Application {
         backlog = new SmallBacklog();
         sprint.setTeam(team);
         sprint.setBacklog(backlog);
+    }
+
+    private void bindStuff() {
+        statusBar.bindTeamName(team.getName());
+        statusBar.bindTeamVelocity(team.getVelocity());
+        statusBar.bindStoryPointsDone(backlog.getFinishedPoints());
     }
 
     private GridPane makeGridPane() {
@@ -92,6 +102,7 @@ public class ScrumGameApplication extends Application {
 
     private void loadData() {
         initScrum();
+        bindStuff();
         addCardsToBoard();
     }
 
@@ -150,6 +161,8 @@ public class ScrumGameApplication extends Application {
         Label teamVelocity = new Label("Velocity: ");
         Label storyPointsDone = new Label("Story points done: ");
         //storyPointsDone.textProperty().bind(storiesDone);
+        teamName.textProperty().bind(team.getName());
+        //StringBinding label = team.name.;
 
         hbox.getChildren().addAll(teamName, teamVelocity, storyPointsDone);
 

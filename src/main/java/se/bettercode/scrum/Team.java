@@ -1,28 +1,33 @@
 package se.bettercode.scrum;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Team {
 
-    private String name = "No name";
-    private int velocity = 0;
+    private StringProperty name;
+    private IntegerProperty velocity;
 
     public Team(String name, int velocity) {
-        this.name = name;
-        this.velocity = velocity;
+        this.name = new SimpleStringProperty(name);
+        this.velocity = new SimpleIntegerProperty(velocity);
     }
 
-    public String getName() {
-        return name;
+    public final StringProperty getName() {
+        return this.name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public final void setName(String name) {
+        this.name.setValue(name);
     }
 
-    public int getVelocity() {
+    public final IntegerProperty getVelocity() {
         return velocity;
     }
 
-    public void setVelocity(int velocity) {
-        this.velocity = velocity;
+    public final void setVelocity(int velocity) {
+        this.velocity.set(velocity);
     }
 }

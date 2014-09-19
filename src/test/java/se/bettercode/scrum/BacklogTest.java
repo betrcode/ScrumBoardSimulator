@@ -37,7 +37,7 @@ public class BacklogTest extends TestCase {
         Story story = backlog.getStory();
         int work = story.getTotalPoints();
         story.workOnStory(work);
-        assertEquals(work, backlog.getFinishedPoints());
+        assertEquals(work, backlog.calculateFinishedPoints());
     }
 
     public void testGetFinishedStoriesCount() throws Exception {
@@ -60,7 +60,7 @@ public class BacklogTest extends TestCase {
         int work = story.getTotalPoints() - 1;
         story.workOnStory(work);
         assertEquals(work, backlog.getWorkInProgressPoints());
-        assertEquals(0, backlog.getFinishedPoints());
+        assertEquals(0, backlog.calculateFinishedPoints());
     }
 
     public void testToString() throws Exception {

@@ -21,7 +21,7 @@ public class Sprint {
     }
 
     public int getDailyBurnrate() {
-        return team.getVelocity() / lengthInDays;
+        return team.getVelocity().get() / lengthInDays;
     }
 
     public void runSprint() {
@@ -35,22 +35,14 @@ public class Sprint {
         for (int day=0; day<=lengthInDays; day++) {
             System.out.println("Day " + day + ": " + backlog.getFinishedStoriesCount() + " finished stories in total.");
             int dailyBurn = getDailyBurnrate();
-            boolean haveWorkRemaining = true;
-            while (dailyBurn > 0 && haveWorkRemaining) {
-                Story story = backlog.getStory();
-                if (story == null) {
-                    System.out.println("Sprint fully completed before running out of days!");
-                    haveWorkRemaining = false;
-                } else {
-                    dailyBurn = story.workOnStory(dailyBurn);
-                }
-            }
+            boolean haveWorkRemaining = backlog.runDay(dailyBurn);
             if (!haveWorkRemaining) {
                 break;
             }
         }
         System.out.println(backlog);
-        System.out.println("A total of " + backlog.getFinishedPoints() + " points have been finished!");
+        System.out.println("A total of " + backlog.calculateFinishedPoints() + " points have been finished!");
         System.out.println("Wasted " + backlog.getWorkInProgressPoints() + " points");
     }
+
 }
