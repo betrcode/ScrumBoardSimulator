@@ -30,4 +30,12 @@ public class Team {
     public final void setVelocity(int velocity) {
         this.velocity.set(velocity);
     }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "name=" + name.getValue() +
+                ", velocity=" + velocity.get() +
+                '}';
+    }
 }

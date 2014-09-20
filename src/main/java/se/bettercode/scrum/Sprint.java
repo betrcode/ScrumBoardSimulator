@@ -65,7 +65,7 @@ public class Sprint {
 
         int dailyBurn = getDailyBurnrate();
 
-        System.out.println("Running Sprint simulation with team \"" + team.nameProperty() + "\" (velocity " + team.velocityProperty() + ") for Sprint \"" + name + "\" for " + lengthInDays.get() + " days...");
+        System.out.println("Running Sprint simulation with team " + team + " for Sprint \"" + name + "\" for " + lengthInDays.get() + " days...");
         System.out.println(backlog);
         System.out.println("Total backlog size is " + backlog.getTotalPoints() + " points.");
         System.out.println("Burning through backlog at " + dailyBurn + " points per day.");
