@@ -23,6 +23,10 @@ public class Sprint {
         this.backlog = backlog;
     }
 
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
     public int getLengthInDays() {
         return lengthInDays.get();
     }
@@ -45,6 +49,10 @@ public class Sprint {
 
     public boolean getRunning() {
         return running.get();
+    }
+
+    public boolean isDone() {
+        return getLengthInDays() == getCurrentDay();
     }
 
     public BooleanProperty runningProperty() {

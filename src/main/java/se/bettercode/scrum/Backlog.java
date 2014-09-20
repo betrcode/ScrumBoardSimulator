@@ -29,8 +29,8 @@ public class Backlog {
         return stories;
     }
 
-    public IntegerProperty getDonePoints() {
-        return donePoints;
+    public int getDonePoints() {
+        return donePoints.get();
     }
 
     public IntegerProperty donePointsProperty() {
