@@ -1,18 +1,12 @@
 package se.bettercode.scrum;
 
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import se.bettercode.scrum.gui.Board;
 import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;
-
-import java.util.ArrayList;
 
 
 public class ScrumGameApplication extends Application {

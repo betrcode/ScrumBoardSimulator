@@ -1,12 +1,14 @@
 package se.bettercode.scrum.gui;
 
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
 import se.bettercode.scrum.Backlog;
 import se.bettercode.scrum.Story;
+import se.bettercode.scrum.StoryCardController;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,16 +18,20 @@ import static java.lang.Thread.sleep;
 public class Board extends HBox {
 
     private Backlog backlog;
-    private final VBox todoColumn = new VBox();
-    private final VBox startedColumn = new VBox();
-    private final VBox doneColumn = new VBox();
+    private final VBox todoColumn = new VBox(10);
+    private final VBox startedColumn = new VBox(10);
+    private final VBox doneColumn = new VBox(10);
     private final AudioClip ding;
 
     public Board() {
+        setPadding(new Insets(10));
+
         ding = new AudioClip(getClass().getResource("/bell.wav").toString());
         columns().forEach(o -> o.minWidth(300));
         columns().forEach(o -> o.setPrefWidth(1000));
+
         getChildren().addAll(columns());
+
     }
 
     private List<VBox> columns() {
@@ -64,13 +70,13 @@ public class Board extends HBox {
             for (Story story : backlog.getStories()) {
                 switch (story.getStatus()) {
                     case TODO:
-                        todoColumn.getChildren().add(new StoryCard(story));
+                        todoColumn.getChildren().add(new StoryCardController(story));
                         break;
                     case STARTED:
-                        startedColumn.getChildren().add(new StoryCard(story));
+                        startedColumn.getChildren().add(new StoryCardController(story));
                         break;
                     case FINISHED:
-                        doneColumn.getChildren().add(new StoryCard(story));
+                        doneColumn.getChildren().add(new StoryCardController(story));
                         break;
                 }
             }
