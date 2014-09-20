@@ -47,11 +47,9 @@ public class ScrumGameApplication extends Application {
     }
 
     private void initSprint() {
-        sprint = new Sprint("First sprint", 10);
         team = new Team("The Cobras", 23);
         backlog = new SmallBacklog();
-        sprint.setTeam(team);
-        sprint.setBacklog(backlog);
+        sprint = new Sprint("First sprint", 10, team, backlog);
 
         board.bindBacklog(backlog);
         toolBar.bindRunningProperty(sprint.runningProperty());

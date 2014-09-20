@@ -8,11 +8,9 @@ import se.bettercode.scrum.Team;
 public class Main {
 
     public static void main(String[] args) {
-        Sprint sprint = new Sprint("First sprint", 10);
         Team team = new Team("The Cobras", 23);
         Backlog backlog = new SmallBacklog();
-        sprint.setTeam(team);
-        sprint.setBacklog(backlog);
+        Sprint sprint = new Sprint("First sprint", 10, team, backlog);
         sprint.runSprint();
     }
 }

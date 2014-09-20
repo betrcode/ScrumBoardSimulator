@@ -16,9 +16,11 @@ public class Sprint {
     private IntegerProperty currentDay = new SimpleIntegerProperty(0);
     private BooleanProperty running = new SimpleBooleanProperty(false);
 
-    public Sprint(String name, int lengthInDays) {
+    public Sprint(String name, int lengthInDays, Team team, Backlog backlog) {
         this.name = name;
         this.lengthInDays.set(lengthInDays);
+        this.team = team;
+        this.backlog = backlog;
     }
 
     public int getLengthInDays() {
@@ -27,14 +29,6 @@ public class Sprint {
 
     public IntegerProperty lengthInDaysProperty() {
         return lengthInDays;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    public void setBacklog(Backlog backlog) {
-        this.backlog = backlog;
     }
 
     public int getDailyBurnrate() {
