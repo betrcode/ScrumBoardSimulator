@@ -66,22 +66,18 @@ public class Sprint {
                 assert backlog != null : "Backlog is null";
 
                 setRunning(true);
+                int dailyBurn = getDailyBurnrate();
 
                 System.out.println("Running Sprint simulation with team \"" + team.nameProperty() + "\" (velocity " + team.velocityProperty() + ") for Sprint \"" + name + "\" for " + lengthInDays.get() + " days...");
                 System.out.println(backlog);
                 System.out.println("Total backlog size is " + backlog.getTotalPoints() + " points.");
-                System.out.println("Burning through backlog at " + getDailyBurnrate() + " points per day.");
+                System.out.println("Burning through backlog at " + dailyBurn + " points per day.");
 
                 for (int day=0; day<=lengthInDays.get(); day++) {
                     setCurrentDay(day);
                     System.out.println("Day " + day + ": " + backlog.getFinishedStoriesCount() + " finished stories in total.");
-                    int dailyBurn = getDailyBurnrate();
                     boolean haveWorkRemaining = backlog.runDay(dailyBurn);
-                    try {
-                        Thread.sleep(SLEEP_MILLIS);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    sleepThread();
                     if (!haveWorkRemaining) {
                         break;
                     }
@@ -93,6 +89,14 @@ public class Sprint {
             }
 
         }.start();
+    }
+
+    private void sleepThread() {
+        try {
+            Thread.sleep(SLEEP_MILLIS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setCurrentDay(int day) {
