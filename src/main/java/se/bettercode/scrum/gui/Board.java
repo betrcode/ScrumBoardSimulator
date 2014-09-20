@@ -13,9 +13,6 @@ import java.util.List;
 
 import static java.lang.Thread.sleep;
 
-/**
- * Created by max on 2014-09-19.
- */
 public class Board extends HBox {
 
     private Backlog backlog;
@@ -25,7 +22,6 @@ public class Board extends HBox {
     private final AudioClip ding;
 
     public Board() {
-        //ding = new AudioClip("http://soundbible.com/grab.php?id=55&type=wav");
         ding = new AudioClip(getClass().getResource("/bell.wav").toString());
         columns().forEach(o -> o.minWidth(300));
         columns().forEach(o -> o.setPrefWidth(1000));
@@ -64,11 +60,6 @@ public class Board extends HBox {
 
     private void updateBoard() {
         Platform.runLater(() -> {
-            //AudioClip ding = new AudioClip("file://home/max/workspace/scrumboardsimulator/src/main/resources/ding.mp3");
-            //AudioClip ding2 = new AudioClip("http://soundbible.com/grab.php?id=56&type=wav");
-            //final URL resource = getClass().getResource("ding.mp3");
-            //AudioClip ding3 = new AudioClip(resource.toString());
-            //ding.play(1.0);
             clearAllColumns();
             for (Story story : backlog.getStories()) {
                 switch (story.getStatus()) {

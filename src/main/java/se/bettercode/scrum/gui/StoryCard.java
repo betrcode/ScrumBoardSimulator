@@ -33,6 +33,8 @@ public class StoryCard extends Group {
         rectangle.setFill(Color.LEMONCHIFFON);
         rectangle.setStroke(Color.LIGHTGREEN);
         rectangle.setStrokeWidth(4);
+        rectangle.setArcHeight(10);
+        rectangle.setArcWidth(10);
         return rectangle;
     }
 
