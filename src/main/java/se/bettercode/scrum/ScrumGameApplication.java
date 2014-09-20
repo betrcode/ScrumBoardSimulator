@@ -89,7 +89,6 @@ public class ScrumGameApplication extends Application {
     }
 
 
-
     private void loadData() {
         initSprint();
         bindSprintDataToStatusBar();

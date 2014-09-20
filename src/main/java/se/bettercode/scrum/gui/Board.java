@@ -3,10 +3,7 @@ package se.bettercode.scrum.gui;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import se.bettercode.scrum.Backlog;
 import se.bettercode.scrum.Story;
@@ -27,6 +24,7 @@ public class Board extends HBox {
 
     public Board() {
         columns().forEach(o -> o.minWidth(300));
+        columns().forEach(o -> o.setPrefWidth(1000));
         getChildren().addAll(columns());
     }
 
