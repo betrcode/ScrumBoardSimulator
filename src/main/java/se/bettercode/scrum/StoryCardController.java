@@ -13,6 +13,8 @@ import java.net.URL;
 
 public class StoryCardController extends BorderPane {
 
+    public static final int MEDIUM_STORY_POINTS = 5;
+
     @FXML
     private Text storyPoints;
 
@@ -22,8 +24,10 @@ public class StoryCardController extends BorderPane {
     @FXML
     private BorderPane storyCard;
 
+    private Story story;
 
     public StoryCardController(Story story) {
+        this.story = story;
         URL location = getClass().getResource("StoryCard.fxml");
         //ResourceBundle resourceBundle = ResourceBundle.getBundle("se.bettercode.scrum");
         FXMLLoader fxmlLoader = new FXMLLoader(location);
@@ -37,6 +41,7 @@ public class StoryCardController extends BorderPane {
         }
         storyTitle.setText(story.getTitle());
         storyPoints.setText(Integer.toString(story.getTotalPoints()));
+        setPrefHeight(getHeightBasedOnStoryPoints());
     }
 
     public void bindStoryTitle(StringProperty title) {
@@ -45,5 +50,15 @@ public class StoryCardController extends BorderPane {
 
     public void bindStoryPoints(IntegerProperty points) {
         storyPoints.textProperty().bind(Bindings.convert(points));
+    }
+
+    private double getHeightBasedOnStoryPoints() {
+        if (story.getTotalPoints() > MEDIUM_STORY_POINTS) {
+            return 110;
+        } else if (story.getTotalPoints() < MEDIUM_STORY_POINTS) {
+            return 45;
+        } else {
+            return 80;
+        }
     }
 }
