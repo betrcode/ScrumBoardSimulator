@@ -13,10 +13,12 @@ unplanned work and see how it affects the Sprint and how much waste is created.
 ## How to run
 * No idea yet. As a JavaFX app.
 
+## Continuous Integration
+[https://betrcode.ci.cloudbees.com/job/ScrumBoardSimulator/](https://betrcode.ci.cloudbees.com/job/ScrumBoardSimulator/)
+
 ## Copyright
 All rights reserved at this point. Have not decided what to do with this yet.
 
-## Author
-Max Wenzin
+## Authors
+Max Wenzin & Oscar Lantz
 
-http://se.linkedin.com/in/maxwenzin
