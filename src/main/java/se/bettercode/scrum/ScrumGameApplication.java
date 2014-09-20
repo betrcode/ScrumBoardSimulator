@@ -20,18 +20,6 @@ public class ScrumGameApplication extends Application {
     StatusBar statusBar = new StatusBar();
     ToolBar toolBar = new ToolBar();
 
-    public Sprint getSprint() {
-        return sprint;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public Backlog getBacklog() {
-        return backlog;
-    }
-
     public static void main(String[] args) {
         System.out.println("Launching JavaFX application.");
         launch(args);
@@ -82,12 +70,10 @@ public class ScrumGameApplication extends Application {
         toolBar.setStartButtonAction((event) -> sprint.runSprint());
     }
 
-
     private void loadData() {
         initSprint();
         bindSprintDataToStatusBar();
     }
-
 
     public void stop() {
         System.out.println("Inside stop()");
