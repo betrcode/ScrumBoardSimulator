@@ -60,21 +60,21 @@ public class Sprint {
     }
 
     public void runSprint() {
+        assert team != null : "Team is null";
+        assert backlog != null : "Backlog is null";
+
+        int dailyBurn = getDailyBurnrate();
+
+        System.out.println("Running Sprint simulation with team \"" + team.nameProperty() + "\" (velocity " + team.velocityProperty() + ") for Sprint \"" + name + "\" for " + lengthInDays.get() + " days...");
+        System.out.println(backlog);
+        System.out.println("Total backlog size is " + backlog.getTotalPoints() + " points.");
+        System.out.println("Burning through backlog at " + dailyBurn + " points per day.");
+
         new Thread() {
 
             @Override
             public void run() {
-                assert team != null : "Team is null";
-                assert backlog != null : "Backlog is null";
-
                 setRunning(true);
-                int dailyBurn = getDailyBurnrate();
-
-                System.out.println("Running Sprint simulation with team \"" + team.nameProperty() + "\" (velocity " + team.velocityProperty() + ") for Sprint \"" + name + "\" for " + lengthInDays.get() + " days...");
-                System.out.println(backlog);
-                System.out.println("Total backlog size is " + backlog.getTotalPoints() + " points.");
-                System.out.println("Burning through backlog at " + dailyBurn + " points per day.");
-
                 for (int day=0; day<=lengthInDays.get(); day++) {
                     setCurrentDay(day);
                     System.out.println("Day " + day + ": " + backlog.getFinishedStoriesCount() + " finished stories in total.");
@@ -85,12 +85,12 @@ public class Sprint {
                     }
                 }
                 setRunning(false);
-                System.out.println(backlog);
-                System.out.println("A total of " + backlog.calculateFinishedPoints() + " points have been finished!");
-                System.out.println("Wasted " + backlog.getWorkInProgressPoints() + " points");
             }
 
         }.start();
+        System.out.println(backlog);
+        System.out.println("A total of " + backlog.calculateFinishedPoints() + " points have been finished!");
+        System.out.println("Wasted " + backlog.getWorkInProgressPoints() + " points");
     }
 
     private void sleepThread() {

@@ -19,8 +19,4 @@ public class SprintTest extends TestCase {
         assertEquals(false, sprint.getRunning());
     }
 
-    // Slightly useless test that just runs the Sprint without any asserts. Hard to test because of threading.
-    public void testRunSprint() {
-        sprint.runSprint();
-    }
 }
