@@ -1,18 +1,17 @@
 package se.bettercode.scrum.gui;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
 import se.bettercode.scrum.Backlog;
 import se.bettercode.scrum.Story;
 
-
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 /**
  * Created by max on 2014-09-19.
@@ -26,7 +25,8 @@ public class Board extends HBox {
     private final AudioClip ding;
 
     public Board() {
-        ding = new AudioClip("http://soundbible.com/grab.php?id=55&type=wav");
+        //ding = new AudioClip("http://soundbible.com/grab.php?id=55&type=wav");
+        ding = new AudioClip(getClass().getResource("/bell.wav").toString());
         columns().forEach(o -> o.minWidth(300));
         columns().forEach(o -> o.setPrefWidth(1000));
         getChildren().addAll(columns());
@@ -50,9 +50,15 @@ public class Board extends HBox {
 
     private void playDingIfDone(Story story) {
         if (story.getStatus() == Story.StoryState.FINISHED) {
-            ding.setCycleCount(story.getTotalPoints());
-            ding.setRate(6.0);
-            ding.play(1.0);
+            for (int i=0; i < story.getTotalPoints(); i++) {
+                ding.stop();
+                ding.play(1.0);
+                try {
+                    sleep(250 + i * 20);
+                } catch (InterruptedException e) {
+
+                }
+            }
         }
     }
 
