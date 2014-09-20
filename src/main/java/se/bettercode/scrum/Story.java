@@ -76,7 +76,7 @@ public class Story {
         return "Story{" +
                 "points=" + totalPoints +
                 ", pointsDone=" + pointsDone +
-                ", status=" + status +
+                ", status=" + status.getValue() +
                 '}';
     }
 }
