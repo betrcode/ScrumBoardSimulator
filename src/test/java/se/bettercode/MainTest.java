@@ -25,10 +25,7 @@ public class MainTest extends TestCase {
                                 "Backlog{stories=[Story{points=3, pointsDone=0, status=TODO}, Story{points=5, pointsDone=0, status=TODO}, Story{points=8, pointsDone=0, status=TODO}, Story{points=5, pointsDone=0, status=TODO}, Story{points=1, pointsDone=0, status=TODO}]}%n" +
                                 "Total backlog size is 22 points.%n" +
                                 "Burning through backlog at 2 points per day.%n" +
-                                "Backlog{stories=[Story{points=3, pointsDone=0, status=TODO}, Story{points=5, pointsDone=0, status=TODO}, Story{points=8, pointsDone=0, status=TODO}, Story{points=5, pointsDone=0, status=TODO}, Story{points=1, pointsDone=0, status=TODO}]}%n" +
-                                "A total of 0 points have been finished!%n" +
-                                "Wasted 0 points%n" +
-                                "Finished command line app.%n", EOL, EOL, EOL, EOL, EOL, EOL, EOL, EOL, EOL),
+                                "Finished command line app.%n", EOL, EOL, EOL, EOL, EOL, EOL),
                 bytes.toString());
     }
 }

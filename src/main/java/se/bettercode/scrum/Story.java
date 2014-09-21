@@ -3,6 +3,9 @@ package se.bettercode.scrum;
 
 public class Story {
 
+    private int doneDay;
+    private int startedDay;
+
     public enum StoryState {TODO, STARTED, FINISHED;}
     private int totalPoints;
     private int pointsDone = 0;
@@ -40,19 +43,26 @@ public class Story {
         this.title = title;
     }
 
+    public double getLeadTime() {
+        return doneDay - startedDay;
+    }
+
     /**
      *
      * @param points
      * @return any leftover points
      */
-    public int workOnStory(int points) {
-        status.setState(StoryState.STARTED);
-
+    public int workOnStory(int points, int day) {
+        if (status.getState() == StoryState.TODO) {
+            status.setState(StoryState.STARTED);
+            startedDay = day;
+        }
 
         pointsDone += points;
 
         if (pointsDone >= totalPoints) {
             status.setState(StoryState.FINISHED);
+            doneDay = day;
         }
 
         if (pointsDone > totalPoints) {

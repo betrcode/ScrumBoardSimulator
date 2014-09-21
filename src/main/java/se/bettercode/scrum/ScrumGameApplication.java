@@ -61,6 +61,7 @@ public class ScrumGameApplication extends Application {
         statusBar.bindStoryPointsDone(backlog.donePointsProperty());
         statusBar.bindDaysInSprint(sprint.lengthInDaysProperty());
         statusBar.bindCurrentDay(sprint.currentDayProperty());
+        statusBar.bindLeadTime(backlog.averageLeadTimeProperty());
     }
 
     private void bindActionsToToolBar() {

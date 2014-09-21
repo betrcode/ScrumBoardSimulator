@@ -1,9 +1,11 @@
 package se.bettercode.scrum.gui;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
@@ -16,6 +18,7 @@ public class StatusBar extends HBox {
     private Label teamVelocityLabel = new Label();
     private Label storyPointsDoneLabel = new Label();
     private Label currentDayLabel = new Label();
+    private Label leadTimeLabel = new Label();
     private ProgressBar progressBar = new ProgressBar(0.0);
     private IntegerProperty daysInSprint;
 
@@ -27,6 +30,7 @@ public class StatusBar extends HBox {
         getChildren().addAll(new Label("Team: "), teamNameLabel,
                              new Label("Velocity: "), teamVelocityLabel,
                              new Label("Story points done: "), storyPointsDoneLabel,
+                             new Label("Avg lead time: "), leadTimeLabel,
                              new Label("Day: "), currentDayLabel,
                              progressBar);
     }
@@ -58,4 +62,7 @@ public class StatusBar extends HBox {
         this.daysInSprint = daysInSprint;
     }
 
+    public void bindLeadTime(DoubleProperty leadTime) {
+        leadTimeLabel.textProperty().bind(convert(leadTime));
+    }
 }

@@ -25,7 +25,7 @@ public class StoryTest extends TestCase {
     }
 
     public void testWorkOnStoryWhenOnlyPartiallyCompleted() throws Exception {
-        int remainingPoints = story.workOnStory(3);
+        int remainingPoints = story.workOnStory(3, 1);
         assertEquals(0, remainingPoints);
         assertEquals(Story.StoryState.STARTED, story.getStatus());
         assertEquals(3, story.getPointsDone());
@@ -33,7 +33,7 @@ public class StoryTest extends TestCase {
     }
 
     public void testWorkOnStoryUntilExactCompletion() throws Exception {
-        int remainingPoints = story.workOnStory(5);
+        int remainingPoints = story.workOnStory(5, 1);
         assertEquals(0, remainingPoints);
         assertEquals(Story.StoryState.FINISHED, story.getStatus());
         assertEquals(5, story.getPointsDone());
@@ -41,7 +41,7 @@ public class StoryTest extends TestCase {
     }
 
     public void testWorkOnStoryUntilOverCompleted() throws Exception {
-        int remainingPoints = story.workOnStory(7);
+        int remainingPoints = story.workOnStory(7, 1);
         assertEquals(Story.StoryState.FINISHED, story.getStatus());
         assertEquals(5, story.getPointsDone());
         assertEquals(0, story.getRemainingPoints());
@@ -49,11 +49,20 @@ public class StoryTest extends TestCase {
     }
 
     public void testWorkOnStorySeveralTimes() throws Exception {
-        story.workOnStory(3);
-        story.workOnStory(1);
+        story.workOnStory(3, 1);
+        story.workOnStory(1, 2);
         assertEquals(Story.StoryState.STARTED, story.getStatus());
         assertEquals(4, story.getPointsDone());
         assertEquals(1, story.getRemainingPoints());
+    }
+
+    public void testLeadTime() {
+        final int POINTS_PER_DAY = 2;
+        for (int day=1; day<=3; day++) {
+            story.workOnStory(POINTS_PER_DAY, day);
+        }
+        assertEquals(Story.StoryState.FINISHED, story.getStatus());
+        assertEquals(2.0, story.getLeadTime());
     }
 
     public void testGetRemainingPoints() throws Exception {

@@ -78,19 +78,19 @@ public class Sprint {
                 for (int day=0; day<=lengthInDays.get(); day++) {
                     setCurrentDay(day);
                     System.out.println("Day " + day + ": " + backlog.getFinishedStoriesCount() + " finished stories in total.");
-                    boolean haveWorkRemaining = backlog.runDay(dailyBurn);
+                    boolean haveWorkRemaining = backlog.runDay(dailyBurn, day);
                     sleepThread();
                     if (!haveWorkRemaining) {
                         break;
                     }
                 }
                 setRunning(false);
+                System.out.println(backlog);
+                System.out.println("A total of " + backlog.calculateFinishedPoints() + " points have been finished!");
+                System.out.println("Wasted " + backlog.getWorkInProgressPoints() + " points");
             }
 
         }.start();
-        System.out.println(backlog);
-        System.out.println("A total of " + backlog.calculateFinishedPoints() + " points have been finished!");
-        System.out.println("Wasted " + backlog.getWorkInProgressPoints() + " points");
     }
 
     private void sleepThread() {

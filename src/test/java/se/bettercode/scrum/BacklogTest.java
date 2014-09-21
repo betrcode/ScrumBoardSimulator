@@ -26,7 +26,7 @@ public class BacklogTest extends TestCase {
 
     public void testGetStoryWhenAllAreFinished() throws Exception {
         Story story = backlog.getStory();
-        story.workOnStory(3);
+        story.workOnStory(3, 1);
         story = backlog.getStory();
         assertNull(story);
     }
@@ -36,14 +36,14 @@ public class BacklogTest extends TestCase {
         backlog.addStory(new Story(7));
         Story story = backlog.getStory();
         int work = story.getTotalPoints();
-        story.workOnStory(work);
+        story.workOnStory(work, 1);
         assertEquals(work, backlog.calculateFinishedPoints());
     }
 
     public void testGetFinishedStoriesCount() throws Exception {
         assertEquals(0, backlog.getFinishedStoriesCount());
         Story story = backlog.getStory();
-        story.workOnStory(3);
+        story.workOnStory(3, 1);
         assertEquals(1, backlog.getFinishedStoriesCount());
     }
 
@@ -58,7 +58,7 @@ public class BacklogTest extends TestCase {
         backlog.addStory(new Story(7));
         Story story = backlog.getStory();
         int work = story.getTotalPoints() - 1;
-        story.workOnStory(work);
+        story.workOnStory(work, 1);
         assertEquals(work, backlog.getWorkInProgressPoints());
         assertEquals(0, backlog.calculateFinishedPoints());
     }
