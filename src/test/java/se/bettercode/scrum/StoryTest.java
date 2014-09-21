@@ -22,7 +22,6 @@ public class StoryTest extends TestCase {
 
     public void testGetStatus() throws Exception {
         assertEquals(Story.StoryState.TODO, story.getStatus());
-
     }
 
     public void testWorkOnStoryWhenOnlyPartiallyCompleted() throws Exception {
@@ -56,7 +55,6 @@ public class StoryTest extends TestCase {
         assertEquals(4, story.getPointsDone());
         assertEquals(1, story.getRemainingPoints());
     }
-
 
     public void testGetRemainingPoints() throws Exception {
         assertEquals(5, story.getRemainingPoints());
