@@ -44,6 +44,10 @@ public class Backlog {
         return averageLeadTime;
     }
 
+    public double getAverageLeadTime() {
+        return averageLeadTime.get();
+    }
+
     public int calculateFinishedPoints() {
         int total = 0;
         for (Story story : stories) {
@@ -88,6 +92,7 @@ public class Backlog {
     public String toString() {
         return "Backlog{" +
                 "stories=" + stories +
+                ", average lead time=" + getAverageLeadTime() +
                 '}';
     }
 

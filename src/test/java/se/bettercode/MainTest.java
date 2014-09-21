@@ -22,7 +22,7 @@ public class MainTest extends TestCase {
         assertEquals(String.format(
                         "Starting command line app.%n" +
                                 "Running Sprint simulation with team Team{name=The Cobras, velocity=23} for Sprint \"First sprint\" for 10 days...%n" +
-                                "Backlog{stories=[Story{points=3, pointsDone=0, status=TODO}, Story{points=5, pointsDone=0, status=TODO}, Story{points=8, pointsDone=0, status=TODO}, Story{points=5, pointsDone=0, status=TODO}, Story{points=1, pointsDone=0, status=TODO}]}%n" +
+                                "Backlog{stories=[Story{points=3, pointsDone=0, status=TODO}, Story{points=5, pointsDone=0, status=TODO}, Story{points=8, pointsDone=0, status=TODO}, Story{points=5, pointsDone=0, status=TODO}, Story{points=1, pointsDone=0, status=TODO}], average lead time=0.0}%n" +
                                 "Total backlog size is 22 points.%n" +
                                 "Burning through backlog at 2 points per day.%n" +
                                 "Finished command line app.%n", EOL, EOL, EOL, EOL, EOL, EOL),

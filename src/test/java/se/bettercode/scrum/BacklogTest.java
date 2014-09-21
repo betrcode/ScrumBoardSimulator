@@ -65,6 +65,6 @@ public class BacklogTest extends TestCase {
 
     public void testToString() throws Exception {
         backlog.addStory(new Story(1));
-        assertEquals("Backlog{stories=[Story{points=3, pointsDone=0, status=TODO}, Story{points=1, pointsDone=0, status=TODO}]}", backlog.toString());
+        assertEquals("Backlog{stories=[Story{points=3, pointsDone=0, status=TODO}, Story{points=1, pointsDone=0, status=TODO}], average lead time=0.0}", backlog.toString());
     }
 }
