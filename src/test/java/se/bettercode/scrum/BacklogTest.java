@@ -63,6 +63,20 @@ public class BacklogTest extends TestCase {
         assertEquals(0, backlog.calculateFinishedPoints());
     }
 
+    //TODO: Cant use runDay in test because of IllegalStateException: Toolkit not initialized
+    /*
+    public void testAverageLeadTime() {
+        backlog.addStory(new Story(8));
+        backlog.addStory(new Story(10));
+        backlog.addStory(new Story(5));
+        int dailyBurn = 2;
+        for (int day=1; day<=20; day++) {
+            backlog.runDay(dailyBurn, day);
+        }
+        assertEquals(2.6, backlog.getAverageLeadTime());
+    }
+    */
+
     public void testToString() throws Exception {
         backlog.addStory(new Story(1));
         assertEquals("Backlog{stories=[Story{points=3, pointsDone=0, status=TODO}, Story{points=1, pointsDone=0, status=TODO}], average lead time=0.0}", backlog.toString());
