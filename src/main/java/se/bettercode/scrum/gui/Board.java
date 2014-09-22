@@ -2,7 +2,8 @@ package se.bettercode.scrum.gui;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
@@ -15,7 +16,7 @@ import java.util.List;
 
 import static java.lang.Thread.sleep;
 
-public class Board extends HBox {
+public class Board extends GridPane {
 
     private Backlog backlog;
     private final VBox todoColumn = new VBox(10);
@@ -27,10 +28,13 @@ public class Board extends HBox {
         setPadding(new Insets(10));
 
         ding = new AudioClip(getClass().getResource("/bell.wav").toString());
-        columns().forEach(o -> o.minWidth(300));
-        columns().forEach(o -> o.setPrefWidth(1000));
-
-        getChildren().addAll(columns());
+        int i = 0;
+        for (VBox columnBox : columns()) {
+            ColumnConstraints constraints = new ColumnConstraints();
+            constraints.setPercentWidth(100); // Will be treated as relative weight when sum is over 100.
+            getColumnConstraints().add(constraints);
+            add(columnBox, i++, 1);
+        }
 
     }
 
