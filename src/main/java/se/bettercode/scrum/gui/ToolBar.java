@@ -1,6 +1,7 @@
 package se.bettercode.scrum.gui;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -22,11 +23,11 @@ public class ToolBar extends HBox {
         getChildren().addAll(loadButton, startButton);
     }
 
-    public void setLoadButtonAction(EventHandler eventHandler) {
+    public void setLoadButtonAction(EventHandler<ActionEvent> eventHandler) {
         loadButton.setOnAction(eventHandler);
     }
 
-    public void setStartButtonAction(EventHandler eventHandler) {
+    public void setStartButtonAction(EventHandler<ActionEvent> eventHandler) {
         startButton.setOnAction(eventHandler);
     }
 
