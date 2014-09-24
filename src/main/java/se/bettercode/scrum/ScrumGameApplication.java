@@ -8,17 +8,19 @@ import se.bettercode.scrum.gui.Board;
 import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;
 
+import java.util.prefs.Preferences;
+
 
 public class ScrumGameApplication extends Application {
 
-    Board board = new Board();
-
-    Sprint sprint;
-    Team team;
-    Backlog backlog;
-
-    StatusBar statusBar = new StatusBar();
-    ToolBar toolBar = new ToolBar();
+    private Board board = new Board();
+    private Sprint sprint;
+    private Team team;
+    private Backlog backlog;
+    private StatusBar statusBar = new StatusBar();
+    private ToolBar toolBar = new ToolBar();
+    private Stage primaryStage;
+    private final Preferences userPrefs = Preferences.userNodeForPackage(getClass());
 
     public static void main(String[] args) {
         System.out.println("Launching JavaFX application.");
@@ -32,6 +34,7 @@ public class ScrumGameApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         System.out.println("Inside start()");
         primaryStage.setTitle("Scrum Game");
         BorderPane borderPane = new BorderPane();
@@ -40,10 +43,18 @@ public class ScrumGameApplication extends Application {
         borderPane.setTop(toolBar);
         borderPane.setBottom(statusBar);
         primaryStage.setScene(new Scene(borderPane, 800, 600));
+        setWindowSizeAndPositionBasedOnUserPreferences();
 
         bindActionsToToolBar();
 
         primaryStage.show();
+    }
+
+    private void setWindowSizeAndPositionBasedOnUserPreferences() {
+        primaryStage.setX(userPrefs.getDouble("stage.x", 100));
+        primaryStage.setY(userPrefs.getDouble("stage.x", 100));
+        primaryStage.setWidth(userPrefs.getDouble("stage.width", 800));
+        primaryStage.setHeight(userPrefs.getDouble("stage.height", 600));
     }
 
     private void initSprint() {
@@ -76,5 +87,13 @@ public class ScrumGameApplication extends Application {
 
     public void stop() {
         System.out.println("Inside stop()");
+        saveUserPreferences();
+    }
+
+    private void saveUserPreferences() {
+        userPrefs.putDouble("stage.x", primaryStage.getX());
+        userPrefs.putDouble("stage.y", primaryStage.getY());
+        userPrefs.putDouble("stage.width", primaryStage.getWidth());
+        userPrefs.putDouble("stage.height", primaryStage.getHeight());
     }
 }
