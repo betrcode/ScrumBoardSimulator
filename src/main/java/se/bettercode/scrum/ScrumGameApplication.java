@@ -9,8 +9,6 @@ import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;
 import se.bettercode.scrum.prefs.StageUserPrefs;
 
-import java.util.prefs.Preferences;
-
 
 public class ScrumGameApplication extends Application {
 
@@ -21,7 +19,6 @@ public class ScrumGameApplication extends Application {
     private StatusBar statusBar = new StatusBar();
     private ToolBar toolBar = new ToolBar();
     private Stage primaryStage;
-    private final Preferences userPrefs = Preferences.userNodeForPackage(getClass());
     private StageUserPrefs prefs;
 
     public static void main(String[] args) {
