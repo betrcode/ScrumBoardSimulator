@@ -36,10 +36,16 @@ public class ScrumGameApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        System.out.println("Inside start()");
         this.primaryStage = primaryStage;
         prefs = new StageUserPrefs(primaryStage);
         prefs.load();
-        System.out.println("Inside start()");
+        setStage();
+        bindActionsToToolBar();
+        primaryStage.show();
+    }
+
+    private void setStage() {
         primaryStage.setTitle("Scrum Game");
         BorderPane borderPane = new BorderPane();
         board.prefWidthProperty().bind(primaryStage.widthProperty());
@@ -47,10 +53,6 @@ public class ScrumGameApplication extends Application {
         borderPane.setTop(toolBar);
         borderPane.setBottom(statusBar);
         primaryStage.setScene(new Scene(borderPane, 800, 600));
-
-        bindActionsToToolBar();
-
-        primaryStage.show();
     }
 
     private void initSprint() {
