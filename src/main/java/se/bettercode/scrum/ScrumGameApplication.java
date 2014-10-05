@@ -8,8 +8,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import se.bettercode.scrum.backlog.Backlog;
 import se.bettercode.scrum.backlog.SelectableBacklogs;
-import se.bettercode.scrum.backlog.SmallBacklog;
-import se.bettercode.scrum.backlog.WellSlicedBacklog;
 import se.bettercode.scrum.gui.Board;
 import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;

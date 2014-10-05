@@ -9,8 +9,10 @@ public class SelectableBacklogs {
     public SelectableBacklogs() {
         Backlog smallBacklog = new SmallBacklog();
         Backlog wellSlicedBacklog = new WellSlicedBacklog();
+        Backlog poorlySlicedBacklog = new PoorlySlicedBacklog();
         backlogHashMap.put(smallBacklog.getName(), smallBacklog);
         backlogHashMap.put(wellSlicedBacklog.getName(), wellSlicedBacklog);
+        backlogHashMap.put(poorlySlicedBacklog.getName(), poorlySlicedBacklog);
     }
 
     public Backlog get(String backlogName) {
