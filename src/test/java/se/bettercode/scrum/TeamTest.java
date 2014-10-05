@@ -1,6 +1,7 @@
 package se.bettercode.scrum;
 
 import junit.framework.TestCase;
+import se.bettercode.scrum.team.Team;
 
 public class TeamTest extends TestCase {
 

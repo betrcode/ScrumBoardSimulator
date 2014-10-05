@@ -12,6 +12,8 @@ import se.bettercode.scrum.gui.Board;
 import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;
 import se.bettercode.scrum.prefs.StageUserPrefs;
+import se.bettercode.scrum.team.CobraTeam;
+import se.bettercode.scrum.team.Team;
 
 
 public class ScrumGameApplication extends Application {
@@ -58,7 +60,7 @@ public class ScrumGameApplication extends Application {
     }
 
     private void initSprint(String backlogName) {
-        team = new Team("The Cobras", 23);
+        team = new CobraTeam();
         backlog = backlogs.get(backlogName);
         sprint = new Sprint("First sprint", 10, team, backlog);
 

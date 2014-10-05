@@ -3,7 +3,7 @@ package se.bettercode;
 import se.bettercode.scrum.backlog.Backlog;
 import se.bettercode.scrum.backlog.SmallBacklog;
 import se.bettercode.scrum.Sprint;
-import se.bettercode.scrum.Team;
+import se.bettercode.scrum.team.Team;
 
 public class Main {
 

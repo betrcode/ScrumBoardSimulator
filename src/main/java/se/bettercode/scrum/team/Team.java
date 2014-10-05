@@ -1,4 +1,4 @@
-package se.bettercode.scrum;
+package se.bettercode.scrum.team;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
