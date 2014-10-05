@@ -1,6 +1,6 @@
 package se.bettercode.scrum.team;
 
-import se.bettercode.scrum.Selectable;
+import se.bettercode.utils.Selectable;
 
 public class SelectableTeams extends Selectable<Team> {
 

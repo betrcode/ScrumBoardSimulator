@@ -1,6 +1,6 @@
 package se.bettercode.scrum.backlog;
 
-import se.bettercode.scrum.Selectable;
+import se.bettercode.utils.Selectable;
 
 public class SelectableBacklogs extends Selectable<Backlog> {
 

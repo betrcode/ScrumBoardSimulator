@@ -1,4 +1,4 @@
-package se.bettercode.scrum;
+package se.bettercode.utils;
 
 import java.util.HashMap;
 
