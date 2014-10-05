@@ -1,10 +1,11 @@
-package se.bettercode.scrum;
+package se.bettercode.scrum.backlog;
 
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import se.bettercode.scrum.Story;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +97,7 @@ public class Backlog {
                 '}';
     }
 
-    boolean runDay(int dailyBurn, int day) {
+    public boolean runDay(int dailyBurn, int day) {
         boolean haveWorkRemaining = true;
         while (dailyBurn > 0 && haveWorkRemaining) {
             Story story = getStory();

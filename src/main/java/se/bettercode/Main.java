@@ -1,7 +1,7 @@
 package se.bettercode;
 
-import se.bettercode.scrum.Backlog;
-import se.bettercode.scrum.SmallBacklog;
+import se.bettercode.scrum.backlog.Backlog;
+import se.bettercode.scrum.backlog.SmallBacklog;
 import se.bettercode.scrum.Sprint;
 import se.bettercode.scrum.Team;
 

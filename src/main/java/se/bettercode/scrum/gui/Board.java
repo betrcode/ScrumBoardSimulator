@@ -7,7 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
-import se.bettercode.scrum.Backlog;
+import se.bettercode.scrum.backlog.Backlog;
 import se.bettercode.scrum.Story;
 import se.bettercode.scrum.StoryCardController;
 

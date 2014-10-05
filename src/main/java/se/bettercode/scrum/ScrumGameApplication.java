@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import se.bettercode.scrum.backlog.Backlog;
+import se.bettercode.scrum.backlog.WellSlicedBacklog;
 import se.bettercode.scrum.gui.Board;
 import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;
@@ -54,7 +56,7 @@ public class ScrumGameApplication extends Application {
 
     private void initSprint() {
         team = new Team("The Cobras", 23);
-        backlog = new SmallBacklog();
+        backlog = new WellSlicedBacklog();
         sprint = new Sprint("First sprint", 10, team, backlog);
 
         board.bindBacklog(backlog);

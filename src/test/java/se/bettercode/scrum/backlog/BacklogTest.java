@@ -1,6 +1,8 @@
-package se.bettercode.scrum;
+package se.bettercode.scrum.backlog;
 
 import junit.framework.TestCase;
+import se.bettercode.scrum.Story;
+import se.bettercode.scrum.backlog.Backlog;
 
 public class BacklogTest extends TestCase {
 

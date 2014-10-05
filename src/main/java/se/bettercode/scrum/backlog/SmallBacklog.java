@@ -1,5 +1,9 @@
-package se.bettercode.scrum;
+package se.bettercode.scrum.backlog;
 
+
+import se.bettercode.scrum.RandomStoryTitleGenerator;
+import se.bettercode.scrum.Story;
+import se.bettercode.scrum.backlog.Backlog;
 
 import java.util.ArrayList;
 

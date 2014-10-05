@@ -1,6 +1,8 @@
 package se.bettercode.scrum;
 
 import junit.framework.TestCase;
+import se.bettercode.scrum.backlog.Backlog;
+import se.bettercode.scrum.backlog.SmallBacklog;
 
 public class SprintTest extends TestCase {
 
