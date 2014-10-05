@@ -14,7 +14,6 @@ import javafx.scene.layout.HBox;
 
 public class ToolBar extends HBox {
 
-    private final Button loadButton = new Button("Load board");
     private final Button startButton = new Button("Start Sprint");
     private ChoiceBox choiceBox = new ChoiceBox();
 
@@ -29,14 +28,9 @@ public class ToolBar extends HBox {
 
         choiceBox.setItems(FXCollections.observableArrayList(backlogs));
         choiceBox.setTooltip(new Tooltip("Select backlog"));
-        loadButton.setPrefSize(100, 20);
         startButton.setPrefSize(100, 20);
 
-        getChildren().addAll(choiceBox, loadButton, startButton);
-    }
-
-    public void setLoadButtonAction(EventHandler<ActionEvent> eventHandler) {
-        loadButton.setOnAction(eventHandler);
+        getChildren().addAll(choiceBox, startButton);
     }
 
     public void setStartButtonAction(EventHandler<ActionEvent> eventHandler) {
@@ -44,7 +38,7 @@ public class ToolBar extends HBox {
     }
 
     public void bindRunningProperty(BooleanProperty booleanProperty) {
-        loadButton.disableProperty().bind(booleanProperty);
+        choiceBox.disableProperty().bind(booleanProperty);
         startButton.disableProperty().bind(booleanProperty);
     }
 

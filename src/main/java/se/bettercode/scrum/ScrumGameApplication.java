@@ -15,11 +15,6 @@ import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;
 import se.bettercode.scrum.prefs.StageUserPrefs;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 
 public class ScrumGameApplication extends Application {
 
@@ -91,7 +86,6 @@ public class ScrumGameApplication extends Application {
         };
 
         toolBar.setChangeListener(changeListener);
-        toolBar.setLoadButtonAction(event -> loadData("Small"));
         toolBar.setStartButtonAction((event) -> sprint.runSprint());
     }
 
