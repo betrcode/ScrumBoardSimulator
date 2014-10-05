@@ -58,19 +58,20 @@ public class Story {
             startedDay = day;
         }
 
-        pointsDone += points;
+        int leftover = 0;
+        int pointsToApply = 0;
 
-        if (pointsDone >= totalPoints) {
+        if (points >= getRemainingPoints()) {
+            pointsToApply = getRemainingPoints();
+            pointsDone += pointsToApply;
+            leftover = points - pointsToApply;
             status.setState(StoryState.FINISHED);
             doneDay = day;
+        } else { // points < getRemainingPoints()
+            pointsDone += points;
         }
 
-        if (pointsDone > totalPoints) {
-            pointsDone = totalPoints;
-            return points - totalPoints;
-        } else {
-            return 0;
-        }
+        return leftover;
     }
 
     public int getRemainingPoints() {

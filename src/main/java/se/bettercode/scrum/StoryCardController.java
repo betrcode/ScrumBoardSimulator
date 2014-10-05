@@ -29,7 +29,6 @@ public class StoryCardController extends BorderPane {
     public StoryCardController(Story story) {
         this.story = story;
         URL location = getClass().getResource("StoryCard.fxml");
-        //ResourceBundle resourceBundle = ResourceBundle.getBundle("se.bettercode.scrum");
         FXMLLoader fxmlLoader = new FXMLLoader(location);
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -40,7 +39,7 @@ public class StoryCardController extends BorderPane {
             throw new RuntimeException(exception);
         }
         storyTitle.setText(story.getTitle());
-        storyPoints.setText(Integer.toString(story.getTotalPoints()));
+        storyPoints.setText(Integer.toString(story.getPointsDone()) + "/" + Integer.toString(story.getTotalPoints()));
         setPrefHeight(getHeightBasedOnStoryPoints());
     }
 
