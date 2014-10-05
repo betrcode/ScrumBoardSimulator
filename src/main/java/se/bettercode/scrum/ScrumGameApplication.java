@@ -12,7 +12,6 @@ import se.bettercode.scrum.gui.Board;
 import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;
 import se.bettercode.scrum.prefs.StageUserPrefs;
-import se.bettercode.scrum.team.CobraTeam;
 import se.bettercode.scrum.team.SelectableTeams;
 import se.bettercode.scrum.team.Team;
 
@@ -26,7 +25,7 @@ public class ScrumGameApplication extends Application {
     private StatusBar statusBar = new StatusBar();
     private SelectableBacklogs backlogs = new SelectableBacklogs();
     private SelectableTeams teams = new SelectableTeams();
-    private ToolBar toolBar = new ToolBar(teams.getNames(), backlogs.getNames());
+    private ToolBar toolBar = new ToolBar(teams.getKeys(), backlogs.getKeys());
     private Stage primaryStage;
     private StageUserPrefs prefs;
 
