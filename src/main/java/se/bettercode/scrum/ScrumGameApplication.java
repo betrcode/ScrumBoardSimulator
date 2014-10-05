@@ -1,15 +1,21 @@
 package se.bettercode.scrum;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import se.bettercode.scrum.backlog.Backlog;
+import se.bettercode.scrum.backlog.SmallBacklog;
 import se.bettercode.scrum.backlog.WellSlicedBacklog;
 import se.bettercode.scrum.gui.Board;
 import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;
 import se.bettercode.scrum.prefs.StageUserPrefs;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ScrumGameApplication extends Application {
@@ -19,7 +25,9 @@ public class ScrumGameApplication extends Application {
     private Team team;
     private Backlog backlog;
     private StatusBar statusBar = new StatusBar();
-    private ToolBar toolBar = new ToolBar();
+    //private Map<String, Backlog> backlogMap = new HashMap<>();
+    private String[] backlogNames = new String[]{"Small", "Well sliced"};
+    private ToolBar toolBar = new ToolBar(backlogNames);
     private Stage primaryStage;
     private StageUserPrefs prefs;
 
@@ -54,9 +62,18 @@ public class ScrumGameApplication extends Application {
         primaryStage.setScene(new Scene(borderPane, 800, 600));
     }
 
-    private void initSprint() {
+    private void initSprint(String backlogName) {
         team = new Team("The Cobras", 23);
-        backlog = new WellSlicedBacklog();
+
+        switch (backlogName) {
+            case "Small":
+                backlog = new SmallBacklog();
+                break;
+            case "Well sliced":
+                backlog = new WellSlicedBacklog();
+                break;
+        }
+
         sprint = new Sprint("First sprint", 10, team, backlog);
 
         board.bindBacklog(backlog);
@@ -73,12 +90,20 @@ public class ScrumGameApplication extends Application {
     }
 
     private void bindActionsToToolBar() {
-        toolBar.setLoadButtonAction(event -> loadData());
+        ChangeListener changeListener = new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                loadData(newValue.toString());
+            }
+        };
+
+        toolBar.setChangeListener(changeListener);
+        toolBar.setLoadButtonAction(event -> loadData("Small"));
         toolBar.setStartButtonAction((event) -> sprint.runSprint());
     }
 
-    private void loadData() {
-        initSprint();
+    private void loadData(String backlogName) {
+        initSprint(backlogName);
         bindSprintDataToStatusBar();
     }
 
