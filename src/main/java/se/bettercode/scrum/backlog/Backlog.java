@@ -9,11 +9,13 @@ import se.bettercode.scrum.Story;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 public class Backlog {
 
     private final String name;
-    List<Story> stories = new ArrayList<Story>();
+    List<Story> stories = new ArrayList<>();
     IntegerProperty donePoints = new SimpleIntegerProperty(0);
     private DoubleProperty averageLeadTime = new SimpleDoubleProperty();
 
@@ -29,17 +31,16 @@ public class Backlog {
         stories.add(story);
     }
 
-    public Story getStory() {
-        for (Story story : stories) {
-            if (story.getStatus() != Story.StoryState.FINISHED) {
-                return story;
-            }
-        }
-        return null; // BAH
+    protected Story getStory() {
+        return stories.stream().filter(p -> p.getStatus() != Story.StoryState.FINISHED).findFirst().get();
     }
 
     public List<Story> getStories() {
         return stories;
+    }
+
+    public List<Story> getStories(Story.StoryState filter) {
+        return stories.stream().filter(p -> p.getStatus() == filter).collect(Collectors.toList());
     }
 
     public int getDonePoints() {
@@ -58,44 +59,24 @@ public class Backlog {
         return averageLeadTime.get();
     }
 
-    public int calculateFinishedPoints() {
-        int total = 0;
-        for (Story story : stories) {
-            if (story.getStatus() == Story.StoryState.FINISHED) {
-                total += story.getTotalPoints();
-            }
-        }
-        return total;
-    }
-
-
     public int getFinishedStoriesCount() {
-        int total = 0;
-        for (Story story : stories) {
-            if (story.getStatus() == Story.StoryState.FINISHED) {
-                total += 1;
-            }
-        }
-        return total;
+        return getStories(Story.StoryState.FINISHED).size();
     }
-
 
     public int getTotalPoints() {
-        int total = 0;
-        for (Story story : stories) {
-            total += story.getTotalPoints();
-        }
-        return total;
+        return stories.stream().mapToInt(Story::getTotalPoints).sum();
     }
 
     public int getWorkInProgressPoints() {
-        int total = 0;
-        for (Story story : stories) {
-            if (story.getStatus() == Story.StoryState.STARTED) {
-                total += story.getPointsDone();
-            }
-        }
-        return total;
+        return getPointsPerState(Story.StoryState.STARTED);
+    }
+
+    public int getFinishedPoints() {
+        return getPointsPerState(Story.StoryState.FINISHED);
+    }
+
+    private int getPointsPerState(Story.StoryState filter) {
+        return getStories(filter).stream().mapToInt(Story::getPointsDone).sum();
     }
 
     @Override
@@ -108,8 +89,13 @@ public class Backlog {
 
     public boolean runDay(int dailyBurn, int day) {
         boolean haveWorkRemaining = true;
+        Story story;
         while (dailyBurn > 0 && haveWorkRemaining) {
-            Story story = getStory();
+            try {
+                story = getStory();
+            } catch (NoSuchElementException e) {
+                story = null;
+            }
             if (story == null) {
                 System.out.println("Sprint fully completed before running out of days!");
                 haveWorkRemaining = false;
@@ -128,23 +114,19 @@ public class Backlog {
     }
 
     private double calculatedAverageLeadTime() {
-        double totalLeadTime = 0.0;
-        int count = 0;
-        for (Story story : stories) {
-            if (story.getStatus() == Story.StoryState.FINISHED) {
-                totalLeadTime += story.getLeadTime();
-                count++;
-            }
-        }
-        if (count == 0) {
+
+        List<Story> finishedStories = getStories(Story.StoryState.FINISHED);
+        double totalLeadTime = finishedStories.stream().mapToDouble(Story::getLeadTime).sum();
+
+        if (finishedStories.size() == 0) {
             return 0.0;
         } else {
-            return totalLeadTime / count;
+            return totalLeadTime / finishedStories.size();
         }
     }
 
     private void setFinishedPoints() {
-        Platform.runLater(() -> donePoints.set(calculateFinishedPoints()));
+        Platform.runLater(() -> donePoints.set(getFinishedPoints()));
     }
 
 }

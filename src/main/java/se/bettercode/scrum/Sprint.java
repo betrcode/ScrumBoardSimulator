@@ -88,7 +88,7 @@ public class Sprint {
                 }
                 setRunning(false);
                 System.out.println(backlog);
-                System.out.println("A total of " + backlog.calculateFinishedPoints() + " points have been finished!");
+                System.out.println("A total of " + backlog.getFinishedPoints() + " points have been finished!");
                 System.out.println("Wasted " + backlog.getWorkInProgressPoints() + " points");
             }
 

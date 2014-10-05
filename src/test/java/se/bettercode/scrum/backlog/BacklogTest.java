@@ -2,7 +2,8 @@ package se.bettercode.scrum.backlog;
 
 import junit.framework.TestCase;
 import se.bettercode.scrum.Story;
-import se.bettercode.scrum.backlog.Backlog;
+
+import java.util.NoSuchElementException;
 
 public class BacklogTest extends TestCase {
 
@@ -33,8 +34,13 @@ public class BacklogTest extends TestCase {
     public void testGetStoryWhenAllAreFinished() throws Exception {
         Story story = backlog.getStory();
         story.workOnStory(3, 1);
-        story = backlog.getStory();
-        assertNull(story);
+        boolean exceptionHit = false;
+        try {
+            story = backlog.getStory();
+        } catch (NoSuchElementException e) {
+            exceptionHit = true;
+        }
+        assertTrue(exceptionHit);
     }
 
     public void testGetFinishedPoints() throws Exception {
@@ -43,7 +49,7 @@ public class BacklogTest extends TestCase {
         Story story = backlog.getStory();
         int work = story.getTotalPoints();
         story.workOnStory(work, 1);
-        assertEquals(work, backlog.calculateFinishedPoints());
+        assertEquals(work, backlog.getFinishedPoints());
     }
 
     public void testGetFinishedStoriesCount() throws Exception {
@@ -66,7 +72,7 @@ public class BacklogTest extends TestCase {
         int work = story.getTotalPoints() - 1;
         story.workOnStory(work, 1);
         assertEquals(work, backlog.getWorkInProgressPoints());
-        assertEquals(0, backlog.calculateFinishedPoints());
+        assertEquals(0, backlog.getFinishedPoints());
     }
 
     //TODO: Cant use runDay in test because of IllegalStateException: Toolkit not initialized

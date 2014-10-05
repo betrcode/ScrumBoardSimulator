@@ -37,6 +37,7 @@ public class StoryTest extends TestCase {
         assertEquals(0, remainingPoints);
         assertEquals(Story.StoryState.FINISHED, story.getStatus());
         assertEquals(5, story.getPointsDone());
+        assertEquals(story.getTotalPoints(), story.getPointsDone());
         assertEquals(0, story.getRemainingPoints());
     }
 
@@ -44,6 +45,7 @@ public class StoryTest extends TestCase {
         int remainingPoints = story.workOnStory(7, 1);
         assertEquals(Story.StoryState.FINISHED, story.getStatus());
         assertEquals(5, story.getPointsDone());
+        assertEquals(story.getTotalPoints(), story.getPointsDone());
         assertEquals(0, story.getRemainingPoints());
         assertEquals(2, remainingPoints);
     }
