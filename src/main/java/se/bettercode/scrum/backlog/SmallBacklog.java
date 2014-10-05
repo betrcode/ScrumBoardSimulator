@@ -3,7 +3,6 @@ package se.bettercode.scrum.backlog;
 
 import se.bettercode.scrum.RandomStoryTitleGenerator;
 import se.bettercode.scrum.Story;
-import se.bettercode.scrum.backlog.Backlog;
 
 import java.util.ArrayList;
 
@@ -12,6 +11,7 @@ public class SmallBacklog extends Backlog {
     final static int STORY_COUNT = 5;
 
     public SmallBacklog() {
+        super("Small");
 
         ArrayList<String> storyTitles = (new RandomStoryTitleGenerator()).generate(STORY_COUNT);
 

@@ -12,9 +12,18 @@ import java.util.List;
 
 public class Backlog {
 
+    private final String name;
     List<Story> stories = new ArrayList<Story>();
     IntegerProperty donePoints = new SimpleIntegerProperty(0);
     private DoubleProperty averageLeadTime = new SimpleDoubleProperty();
+
+    protected Backlog(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public void addStory(Story story) {
         stories.add(story);

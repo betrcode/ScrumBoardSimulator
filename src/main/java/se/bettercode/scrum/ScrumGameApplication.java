@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import se.bettercode.scrum.backlog.Backlog;
+import se.bettercode.scrum.backlog.SelectableBacklogs;
 import se.bettercode.scrum.backlog.SmallBacklog;
 import se.bettercode.scrum.backlog.WellSlicedBacklog;
 import se.bettercode.scrum.gui.Board;
@@ -14,7 +15,9 @@ import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;
 import se.bettercode.scrum.prefs.StageUserPrefs;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,9 +28,8 @@ public class ScrumGameApplication extends Application {
     private Team team;
     private Backlog backlog;
     private StatusBar statusBar = new StatusBar();
-    //private Map<String, Backlog> backlogMap = new HashMap<>();
-    private String[] backlogNames = new String[]{"Small", "Well sliced"};
-    private ToolBar toolBar = new ToolBar(backlogNames);
+    private SelectableBacklogs backlogs = new SelectableBacklogs();
+    private ToolBar toolBar = new ToolBar(backlogs.getNames());
     private Stage primaryStage;
     private StageUserPrefs prefs;
 
@@ -64,16 +66,7 @@ public class ScrumGameApplication extends Application {
 
     private void initSprint(String backlogName) {
         team = new Team("The Cobras", 23);
-
-        switch (backlogName) {
-            case "Small":
-                backlog = new SmallBacklog();
-                break;
-            case "Well sliced":
-                backlog = new WellSlicedBacklog();
-                break;
-        }
-
+        backlog = backlogs.get(backlogName);
         sprint = new Sprint("First sprint", 10, team, backlog);
 
         board.bindBacklog(backlog);

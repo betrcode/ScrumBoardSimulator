@@ -11,8 +11,12 @@ public class BacklogTest extends TestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        backlog = new Backlog();
+        backlog = new Backlog("Test");
         backlog.addStory(new Story(3));
+    }
+
+    public void testGetName() {
+        assertEquals("Test", backlog.getName());
     }
 
     public void testAddStory() throws Exception {
