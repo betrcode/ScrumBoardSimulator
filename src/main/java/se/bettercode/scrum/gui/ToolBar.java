@@ -2,7 +2,6 @@ package se.bettercode.scrum.gui;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,22 +14,23 @@ import javafx.scene.layout.HBox;
 public class ToolBar extends HBox {
 
     private final Button startButton = new Button("Start Sprint");
-    private ChoiceBox choiceBox = new ChoiceBox();
+    private ChoiceBox<String> teamChoiceBox = new ChoiceBox<>();
+    private ChoiceBox backlogChoiceBox = new ChoiceBox();
 
-    public void setChangeListener(ChangeListener changeListener) {
-        choiceBox.getSelectionModel().selectedItemProperty().addListener(changeListener);
-    }
-
-    public ToolBar(String[] backlogs) {
+    public ToolBar(String[] teams, String[] backlogs) {
         setPadding(new Insets(15, 12, 15, 12));
         setSpacing(10);
         setStyle("-fx-background-color: #336699;");
 
-        choiceBox.setItems(FXCollections.observableArrayList(backlogs));
-        choiceBox.setTooltip(new Tooltip("Select backlog"));
+        teamChoiceBox.setItems(FXCollections.observableArrayList(teams));
+        teamChoiceBox.setTooltip(new Tooltip("Select team"));
+
+        backlogChoiceBox.setItems(FXCollections.observableArrayList(backlogs));
+        backlogChoiceBox.setTooltip(new Tooltip("Select backlog"));
+
         startButton.setPrefSize(100, 20);
 
-        getChildren().addAll(choiceBox, startButton);
+        getChildren().addAll(teamChoiceBox, backlogChoiceBox, startButton);
     }
 
     public void setStartButtonAction(EventHandler<ActionEvent> eventHandler) {
@@ -38,8 +38,18 @@ public class ToolBar extends HBox {
     }
 
     public void bindRunningProperty(BooleanProperty booleanProperty) {
-        choiceBox.disableProperty().bind(booleanProperty);
+        teamChoiceBox.disableProperty().bind(booleanProperty);
+        backlogChoiceBox.disableProperty().bind(booleanProperty);
         startButton.disableProperty().bind(booleanProperty);
     }
+
+    public void setTeamChoiceBoxListener(ChangeListener changeListener) {
+        teamChoiceBox.getSelectionModel().selectedItemProperty().addListener(changeListener);
+    }
+
+    public void setBacklogChoiceBoxListener(ChangeListener changeListener) {
+        backlogChoiceBox.getSelectionModel().selectedItemProperty().addListener(changeListener);
+    }
+
 
 }

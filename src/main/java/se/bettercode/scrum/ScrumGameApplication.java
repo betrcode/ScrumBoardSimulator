@@ -13,6 +13,7 @@ import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;
 import se.bettercode.scrum.prefs.StageUserPrefs;
 import se.bettercode.scrum.team.CobraTeam;
+import se.bettercode.scrum.team.SelectableTeams;
 import se.bettercode.scrum.team.Team;
 
 
@@ -24,7 +25,8 @@ public class ScrumGameApplication extends Application {
     private Backlog backlog;
     private StatusBar statusBar = new StatusBar();
     private SelectableBacklogs backlogs = new SelectableBacklogs();
-    private ToolBar toolBar = new ToolBar(backlogs.getNames());
+    private SelectableTeams teams = new SelectableTeams();
+    private ToolBar toolBar = new ToolBar(teams.getNames(), backlogs.getNames());
     private Stage primaryStage;
     private StageUserPrefs prefs;
 
@@ -59,13 +61,14 @@ public class ScrumGameApplication extends Application {
         primaryStage.setScene(new Scene(borderPane, 800, 600));
     }
 
-    private void initSprint(String backlogName) {
-        team = new CobraTeam();
-        backlog = backlogs.get(backlogName);
-        sprint = new Sprint("First sprint", 10, team, backlog);
-
-        board.bindBacklog(backlog);
-        toolBar.bindRunningProperty(sprint.runningProperty());
+    private boolean initSprint() {
+        if (team != null && backlog != null) {
+            sprint = new Sprint("First sprint", 10, team, backlog);
+            board.bindBacklog(backlog);
+            toolBar.bindRunningProperty(sprint.runningProperty());
+            return true;
+        }
+        return false;
     }
 
     private void bindSprintDataToStatusBar() {
@@ -78,20 +81,31 @@ public class ScrumGameApplication extends Application {
     }
 
     private void bindActionsToToolBar() {
-        ChangeListener changeListener = new ChangeListener() {
+        ChangeListener backlogChoiceBoxListener = new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                loadData(newValue.toString());
+                backlog = backlogs.get(newValue.toString());
+                loadData();
             }
         };
 
-        toolBar.setChangeListener(changeListener);
+        ChangeListener teamChoiceBoxListener = new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                team = teams.get(newValue.toString());
+                loadData();
+            }
+        };
+
+        toolBar.setTeamChoiceBoxListener(teamChoiceBoxListener);
+        toolBar.setBacklogChoiceBoxListener(backlogChoiceBoxListener);
         toolBar.setStartButtonAction((event) -> sprint.runSprint());
     }
 
-    private void loadData(String backlogName) {
-        initSprint(backlogName);
-        bindSprintDataToStatusBar();
+    private void loadData() {
+        if (initSprint()) {
+            bindSprintDataToStatusBar();
+        }
     }
 
     public void stop() {

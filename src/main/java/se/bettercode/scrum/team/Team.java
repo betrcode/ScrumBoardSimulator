@@ -23,6 +23,10 @@ public class Team {
         this.name.setValue(name);
     }
 
+    public String getName() {
+        return name.getValue();
+    }
+
     public final IntegerProperty velocityProperty() {
         return velocity;
     }
