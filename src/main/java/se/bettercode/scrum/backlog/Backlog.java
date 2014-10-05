@@ -93,14 +93,14 @@ public class Backlog {
 
     public void runDay(int dailyBurn, int day) {
         Story story;
-        storyloop:
+        storyLoop:
         while (dailyBurn > 0) {
             try {
                 story = getStory();
             } catch (NoSuchElementException e) {
                 story = null;
                 System.out.println("Sprint fully completed before running out of days!");
-                break storyloop;
+                break storyLoop;
             }
             dailyBurn = story.workOnStory(dailyBurn, day);
         }
