@@ -80,9 +80,9 @@ public class Sprint {
                 for (int day=0; day<=lengthInDays.get(); day++) {
                     setCurrentDay(day);
                     System.out.println("Day " + day + ": " + backlog.getFinishedStoriesCount() + " finished stories in total.");
-                    boolean haveWorkRemaining = backlog.runDay(dailyBurn, day);
+                    backlog.runDay(dailyBurn, day);
                     sleepThread();
-                    if (!haveWorkRemaining) {
+                    if (backlog.isFinished()) {
                         break;
                     }
                 }

@@ -79,6 +79,10 @@ public class Backlog {
         return getStories(filter).stream().mapToInt(Story::getPointsDone).sum();
     }
 
+    public boolean isFinished() {
+        return getTotalPoints() == getFinishedPoints();
+    }
+
     @Override
     public String toString() {
         return "Backlog{" +
@@ -87,26 +91,22 @@ public class Backlog {
                 '}';
     }
 
-    public boolean runDay(int dailyBurn, int day) {
-        boolean haveWorkRemaining = true;
+    public void runDay(int dailyBurn, int day) {
         Story story;
-        while (dailyBurn > 0 && haveWorkRemaining) {
+        storyloop:
+        while (dailyBurn > 0) {
             try {
                 story = getStory();
             } catch (NoSuchElementException e) {
                 story = null;
-            }
-            if (story == null) {
                 System.out.println("Sprint fully completed before running out of days!");
-                haveWorkRemaining = false;
-            } else {
-                dailyBurn = story.workOnStory(dailyBurn, day);
+                break storyloop;
             }
+            dailyBurn = story.workOnStory(dailyBurn, day);
         }
 
         setFinishedPoints();
         setAverageLeadTime();
-        return haveWorkRemaining;
     }
 
     private void setAverageLeadTime() {

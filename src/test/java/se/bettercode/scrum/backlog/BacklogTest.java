@@ -75,6 +75,21 @@ public class BacklogTest extends TestCase {
         assertEquals(0, backlog.getFinishedPoints());
     }
 
+    public void testIsFinished() {
+        backlog = new Backlog("Mah backlog");
+        Story story1 = new Story(1);
+        Story story2 = new Story(2);
+        Story story3 = new Story(3);
+        backlog.addStory(story1);
+        backlog.addStory(story2);
+        backlog.addStory(story3);
+        story1.workOnStory(1, 1);
+        story2.workOnStory(2, 1);
+        assertEquals(false, backlog.isFinished());
+        story3.workOnStory(3, 1);
+        assertEquals(true, backlog.isFinished());
+    }
+
     //TODO: Cant use runDay in test because of IllegalStateException: Toolkit not initialized
     /*
     public void testAverageLeadTime() {
