@@ -26,4 +26,10 @@ public class RandomStoryTitleGeneratorTest extends TestCase {
         assertEquals(10, resultSet.size());
     }
 
+    /*
+    public void testHighN() {
+        ArrayList<String> result = generator.generate(1000);
+    }
+    */
+
 }

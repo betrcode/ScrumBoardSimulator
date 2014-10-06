@@ -21,6 +21,12 @@ public class RandomStoryTitleGenerator {
     }
 
     public ArrayList<String> generate(int n) {
+        final int MAX_ALLOWED_N = verbs.length * subject.length;
+
+        if (n > MAX_ALLOWED_N) {
+            throw new IllegalArgumentException("Max value of n is " + MAX_ALLOWED_N);
+        }
+
         String title;
         ArrayList<String> nRandomTitles = new ArrayList<String>();
         while (nRandomTitles.size() < n) {
