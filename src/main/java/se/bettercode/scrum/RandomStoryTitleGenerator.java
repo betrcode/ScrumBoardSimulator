@@ -33,11 +33,6 @@ public class RandomStoryTitleGenerator {
     }
 
     private boolean isStringInList(String search, List<String> list) {
-        for (String str: list) {
-            if (str.equals(search)) {
-                return true;
-            }
-        }
-        return false;
+        return list.stream().anyMatch(p -> p.equals(search));
     }
 }
