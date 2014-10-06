@@ -17,7 +17,9 @@ public class Story {
     }
 
     public Story(int points, String title) {
-        assert (points >= 0) : "Points must not be a negative value.";
+        if (points < 0) {
+            throw new IllegalArgumentException("Points must not be negative.");
+        }
         this.title = title;
         totalPoints = points;
     }

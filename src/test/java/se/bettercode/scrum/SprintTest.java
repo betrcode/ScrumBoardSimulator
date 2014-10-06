@@ -1,24 +1,29 @@
 package se.bettercode.scrum;
 
-import junit.framework.TestCase;
+
+import org.junit.Before;
+import org.junit.Test;
 import se.bettercode.scrum.backlog.Backlog;
 import se.bettercode.scrum.backlog.SmallBacklog;
 import se.bettercode.scrum.team.Team;
 
-public class SprintTest extends TestCase {
+import static org.junit.Assert.assertEquals;
+
+public class SprintTest {
 
     Sprint sprint;
     Team team;
     Backlog backlog;
 
-    public void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() {
         team = new Team("Rock Stars", 23);
         backlog = new SmallBacklog();
         sprint = new Sprint("First Sprint", 10, team, backlog);
     }
 
-    public void testGetRunning() {
+    @Test
+    public void sprintIsNotRunningWhenCreated() {
         assertEquals(false, sprint.getRunning());
     }
 

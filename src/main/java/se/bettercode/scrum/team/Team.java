@@ -17,7 +17,9 @@ public class Team {
     }
 
     public Team(String name, int velocity, int workInProgressLimit) {
-        assert workInProgressLimit >= 1: "WIP limit must be larger than 0";
+        if (workInProgressLimit < 1) {
+            throw new IllegalArgumentException("workInProgressLimit must be 1 or greater.");
+        }
         this.name = new SimpleStringProperty(name);
         this.velocity = new SimpleIntegerProperty(velocity);
         this.workInProgressLimit = new SimpleIntegerProperty(workInProgressLimit);

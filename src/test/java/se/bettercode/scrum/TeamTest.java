@@ -1,29 +1,26 @@
 package se.bettercode.scrum;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import se.bettercode.scrum.team.Team;
 
-public class TeamTest extends TestCase {
+import static org.junit.Assert.assertEquals;
 
+public class TeamTest {
+
+    @Test
     public void testToString() {
         Team team = new Team("Dingos", 17);
         assertEquals("Team{name=Dingos, velocity=17, WIP limit=1}", team.toString());
     }
 
+    @Test
     public void testDefaultVelocity() {
         Team team = new Team("Rhinos", 10);
         assertEquals(1, team.getWorkInProgressLimit());
     }
 
+    @Test(expected = IllegalArgumentException.class)
     public void testInvalidWIPLimit() {
-        Throwable e = null;
-
-        try {
-            Team team = new Team("Monkeys", 20, 0);
-        } catch (Throwable ex) {
-            e = ex;
-        }
-
-        assertTrue(e instanceof AssertionError);
+        new Team("Monkeys", 20, 0);
     }
 }

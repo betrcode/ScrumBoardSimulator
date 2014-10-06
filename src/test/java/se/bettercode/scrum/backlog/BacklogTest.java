@@ -1,37 +1,45 @@
 package se.bettercode.scrum.backlog;
 
-import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
 import se.bettercode.scrum.Story;
 
 import java.util.NoSuchElementException;
 
-public class BacklogTest extends TestCase {
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+public class BacklogTest {
 
     Backlog backlog;
 
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() {
         backlog = new Backlog("Test");
         backlog.addStory(new Story(3));
     }
 
+    @Test
     public void testGetName() {
         assertEquals("Test", backlog.getName());
     }
 
-    public void testAddStory() throws Exception {
+    @Test
+    public void testAddStory() {
         assertEquals(1, backlog.stories.size());
         backlog.addStory(new Story(5));
         assertEquals(2, backlog.stories.size());
     }
 
-    public void testGetStory() throws Exception {
+    @Test
+    public void testGetStory() {
         Story story = backlog.getStory();
         assertNotNull(story);
     }
 
-    public void testGetStoryWhenAllAreFinished() throws Exception {
+    @Test
+    public void testGetStoryWhenAllAreFinished() {
         Story story = backlog.getStory();
         story.workOnStory(3, 1);
         boolean exceptionHit = false;
@@ -43,7 +51,8 @@ public class BacklogTest extends TestCase {
         assertTrue(exceptionHit);
     }
 
-    public void testGetFinishedPoints() throws Exception {
+    @Test
+    public void testGetFinishedPoints() {
         backlog.addStory(new Story(5));
         backlog.addStory(new Story(7));
         Story story = backlog.getStory();
@@ -52,20 +61,23 @@ public class BacklogTest extends TestCase {
         assertEquals(work, backlog.getFinishedPoints());
     }
 
-    public void testGetFinishedStoriesCount() throws Exception {
+    @Test
+    public void testGetFinishedStoriesCount() {
         assertEquals(0, backlog.getFinishedStoriesCount());
         Story story = backlog.getStory();
         story.workOnStory(3, 1);
         assertEquals(1, backlog.getFinishedStoriesCount());
     }
 
-    public void testGetTotalPoints() throws Exception {
+    @Test
+    public void testGetTotalPoints() {
         backlog.addStory(new Story(5));
         backlog.addStory(new Story(7));
         assertEquals(15, backlog.getTotalPoints());
     }
 
-    public void testGetWorkInProgressPoints() throws Exception {
+    @Test
+    public void testGetWorkInProgressPoints() {
         backlog.addStory(new Story(5));
         backlog.addStory(new Story(7));
         Story story = backlog.getStory();
@@ -75,6 +87,7 @@ public class BacklogTest extends TestCase {
         assertEquals(0, backlog.getFinishedPoints());
     }
 
+    @Test
     public void testIsFinished() {
         backlog = new Backlog("Mah backlog");
         Story story1 = new Story(1);
@@ -104,7 +117,8 @@ public class BacklogTest extends TestCase {
     }
     */
 
-    public void testToString() throws Exception {
+    @Test
+    public void testToString() {
         backlog.addStory(new Story(1));
         assertEquals("Backlog{stories=[Story{points=3, pointsDone=0, status=TODO}, Story{points=1, pointsDone=0, status=TODO}], average lead time=0.0}", backlog.toString());
     }
