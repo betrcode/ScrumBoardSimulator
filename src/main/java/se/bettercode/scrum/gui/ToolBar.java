@@ -15,7 +15,7 @@ public class ToolBar extends HBox {
 
     private final Button startButton = new Button("Start Sprint");
     private ChoiceBox<String> teamChoiceBox = new ChoiceBox<>();
-    private ChoiceBox backlogChoiceBox = new ChoiceBox();
+    private ChoiceBox<String> backlogChoiceBox = new ChoiceBox<>();
 
     public ToolBar(String[] teams, String[] backlogs) {
         setPadding(new Insets(15, 12, 15, 12));
@@ -43,11 +43,11 @@ public class ToolBar extends HBox {
         startButton.disableProperty().bind(booleanProperty);
     }
 
-    public void setTeamChoiceBoxListener(ChangeListener changeListener) {
+    public void setTeamChoiceBoxListener(ChangeListener<String> changeListener) {
         teamChoiceBox.getSelectionModel().selectedItemProperty().addListener(changeListener);
     }
 
-    public void setBacklogChoiceBoxListener(ChangeListener changeListener) {
+    public void setBacklogChoiceBoxListener(ChangeListener<String> changeListener) {
         backlogChoiceBox.getSelectionModel().selectedItemProperty().addListener(changeListener);
     }
 
