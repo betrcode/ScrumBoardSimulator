@@ -62,8 +62,9 @@ public class Sprint {
     }
 
     public void runSprint() {
-        assert team != null : "Team is null";
-        assert backlog != null : "Backlog is null";
+        if (team == null || backlog == null) {
+            throw new IllegalArgumentException("Team and Backlog must both be set before running Sprint");
+        }
 
         int dailyBurn = getDailyBurnrate();
 

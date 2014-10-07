@@ -27,4 +27,9 @@ public class SprintTest {
         assertEquals(false, sprint.getRunning());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void cantRunSprintWithoutTeamAndBacklog() {
+        Sprint badSprint = new Sprint("Bad Sprint", 5, null, null);
+        badSprint.runSprint();
+    }
 }
