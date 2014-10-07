@@ -3,18 +3,18 @@ or: Scrum Game. It is a simulation of a Scrum Board where the idea is that you c
 team, team velocity, sprint length, stories and story sizes, work-in-progress limits and random disasters such as
 unplanned work and see how it affects the Sprint and how much waste is created.
 
-## Prerequisites
+## Prerequisites for development
 * Java 8
 * Maven 3
 
 ## How to build & run tests
-* mvn clean install
+* ```mvn clean install```
 
 ## How to run
-* No idea yet. As a JavaFX app.
+* Launching jar from command line: ```java -jar target/ScrumBoardSimulator-1.0-SNAPSHOT.jar```
 
 ## Continuous Integration
-[https://betrcode.ci.cloudbees.com/job/ScrumBoardSimulator/](https://betrcode.ci.cloudbees.com/job/ScrumBoardSimulator/)
+[http://jenkins.crisp.se/job/ScrumBoardSimulator/](http://jenkins.crisp.se/job/ScrumBoardSimulator/)
 
 ## Copyright
 All rights reserved at this point. Have not decided what to do with this yet.
