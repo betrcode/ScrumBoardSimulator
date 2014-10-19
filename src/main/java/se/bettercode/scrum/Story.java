@@ -7,14 +7,7 @@ public class Story {
     private int startedDay;
 
     public enum StoryState {TODO, STARTED, FINISHED;}
-
     private StoryPointSet storyPointSet;
-
-    /*
-    private StoryPoint pointsDone = new StoryPoint(0);
-    private StoryPoint remainingPoints;
-    private StoryPoint totalPoints;
-    */
 
     private StoryStateProperty status = new StoryStateProperty();
     private String title = "";
