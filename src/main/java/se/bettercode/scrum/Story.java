@@ -8,9 +8,13 @@ public class Story {
 
     public enum StoryState {TODO, STARTED, FINISHED;}
 
+    private StoryPointSet storyPointSet;
+
+    /*
     private StoryPoint pointsDone = new StoryPoint(0);
     private StoryPoint remainingPoints;
     private StoryPoint totalPoints;
+    */
 
     private StoryStateProperty status = new StoryStateProperty();
     private String title = "";
@@ -24,8 +28,7 @@ public class Story {
             throw new IllegalArgumentException("Points must not be negative.");
         }
         this.title = title;
-        totalPoints = new StoryPoint(points);
-        remainingPoints = new StoryPoint(points);
+        storyPointSet = new StoryPointSet(points);
     }
 
     public StoryStateProperty statusProperty() {
@@ -33,19 +36,19 @@ public class Story {
     }
 
     public StoryPoint getTotalPoints() {
-        return totalPoints;
+        return storyPointSet.getTotal();
     }
 
     public int getTotalPointsAsInt() {
-        return totalPoints.getPoints();
+        return getTotalPoints().getPoints();
     }
 
     public StoryPoint getPointsDone() {
-        return pointsDone;
+        return storyPointSet.getDone();
     }
 
     public int getPointsDoneAsInt() {
-        return pointsDone.getPoints();
+        return getPointsDone().getPoints();
     }
 
     public StoryState getStatus() {
@@ -79,32 +82,26 @@ public class Story {
 
         if (points >= getRemainingPoints()) {
             pointsToApply = getRemainingPoints();
-            applyPoints(pointsToApply);
+            storyPointSet.apply(pointsToApply);
             leftover = points - pointsToApply;
             status.setState(StoryState.FINISHED);
             doneDay = day;
         } else { // points < getRemainingPoints()
-            applyPoints(points);
+            storyPointSet.apply(points);
         }
 
         return leftover;
     }
 
-    // TODO: extract to class
-    private void applyPoints(int points) {
-        pointsDone.add(points);
-        remainingPoints.subtract(points);
-    }
-
     public int getRemainingPoints() {
-        return remainingPoints.getPoints();
+        return storyPointSet.getRemaining().getPoints();
     }
 
     @Override
     public String toString() {
         return "Story{" +
-                "points=" + totalPoints +
-                ", pointsDone=" + pointsDone +
+                "points=" + getTotalPoints().getPoints() +
+                ", pointsDone=" + getPointsDone().getPoints() +
                 ", status=" + status.getValue() +
                 '}';
     }
