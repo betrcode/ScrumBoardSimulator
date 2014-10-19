@@ -18,12 +18,19 @@ public class DingAudioClip {
 
     protected void playIfDone(Story story) {
         if (story.getStatus() == Story.StoryState.FINISHED) {
-            for (int i=0; i < story.getTotalPoints(); i++) {
-                ding.stop();
-                ding.play(1.0);
-                sleeper(i);
-            }
+            playOneDingPerPoint(story);
         }
+    }
+
+    protected void play() {
+        ding.play(1.0);
+    }
+
+    private void playOneDingPerPoint(Story story) {
+        ding.setCycleCount(story.getTotalPoints());
+        ding.setRate((double)story.getTotalPoints()*2);
+        play();
+        sleeper(1);
     }
 
     private void sleeper(int sleepIncreaseMultiplier) {
