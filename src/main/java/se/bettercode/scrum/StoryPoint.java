@@ -5,6 +5,9 @@ public class StoryPoint {
     private int points;
 
     public StoryPoint(int points) {
+        if (points < 0) {
+            throw new IllegalArgumentException("Points cannot be a negative value.");
+        }
         this.points = points;
     }
 
@@ -35,7 +38,7 @@ public class StoryPoint {
 
         StoryPoint that = (StoryPoint) o;
 
-        if (points != that.points) return false;
+        if (this.getPoints() != that.getPoints()) return false;
 
         return true;
     }
