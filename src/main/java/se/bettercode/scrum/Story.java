@@ -3,8 +3,7 @@ package se.bettercode.scrum;
 
 public class Story {
 
-    private int doneDay;
-    private int startedDay;
+    private StoryDays storyDays = new StoryDays();
 
     public enum StoryState {TODO, STARTED, FINISHED;}
     private StoryPointSet storyPointSet;
@@ -56,7 +55,7 @@ public class Story {
     }
 
     public double getLeadTime() {
-        return doneDay - startedDay;
+        return storyDays.getLeadTime();
     }
 
     /**
@@ -67,7 +66,7 @@ public class Story {
     public int workOnStory(int points, int day) {
         if (status.getState() == StoryState.TODO) {
             status.setState(StoryState.STARTED);
-            startedDay = day;
+            storyDays.setStartedDay(day);
         }
 
         int leftover = 0;
@@ -78,7 +77,7 @@ public class Story {
             storyPointSet.apply(pointsToApply);
             leftover = points - pointsToApply;
             status.setState(StoryState.FINISHED);
-            doneDay = day;
+            storyDays.setDoneDay(day);
         } else { // points < getRemainingPoints()
             storyPointSet.apply(points);
         }
