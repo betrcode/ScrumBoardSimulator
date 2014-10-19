@@ -34,7 +34,7 @@ public class MockedDingAudioClipTest {
 
     public void doneStoryWillPlaySoundsEqualToNumberOfStoryPoints() {
         dingAudioClipMock.playIfDone(doneStory);
-        int expectedPlayTimes = doneStory.getTotalPoints();
+        int expectedPlayTimes = doneStory.getTotalPoints().getPoints();
         Mockito.verify(dingAudioClipMock, times(expectedPlayTimes)).play();
     }
 }

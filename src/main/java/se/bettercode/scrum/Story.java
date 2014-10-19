@@ -7,8 +7,11 @@ public class Story {
     private int startedDay;
 
     public enum StoryState {TODO, STARTED, FINISHED;}
-    private int totalPoints;
-    private int pointsDone = 0;
+
+    private StoryPoint pointsDone = new StoryPoint(0);
+    private StoryPoint remainingPoints;
+    private StoryPoint totalPoints;
+
     private StoryStateProperty status = new StoryStateProperty();
     private String title = "";
 
@@ -21,19 +24,30 @@ public class Story {
             throw new IllegalArgumentException("Points must not be negative.");
         }
         this.title = title;
-        totalPoints = points;
+        totalPoints = new StoryPoint(points);
+        remainingPoints = new StoryPoint(points);
     }
 
     public StoryStateProperty statusProperty() {
         return status;
     }
 
-    public int getTotalPoints() {
+    public StoryPoint getTotalPoints() {
         return totalPoints;
     }
-    public int getPointsDone() {
+
+    public int getTotalPointsAsInt() {
+        return totalPoints.getPoints();
+    }
+
+    public StoryPoint getPointsDone() {
         return pointsDone;
     }
+
+    public int getPointsDoneAsInt() {
+        return pointsDone.getPoints();
+    }
+
     public StoryState getStatus() {
         return status.getState();
     }
@@ -65,19 +79,25 @@ public class Story {
 
         if (points >= getRemainingPoints()) {
             pointsToApply = getRemainingPoints();
-            pointsDone += pointsToApply;
+            applyPoints(pointsToApply);
             leftover = points - pointsToApply;
             status.setState(StoryState.FINISHED);
             doneDay = day;
         } else { // points < getRemainingPoints()
-            pointsDone += points;
+            applyPoints(points);
         }
 
         return leftover;
     }
 
+    // TODO: extract to class
+    private void applyPoints(int points) {
+        pointsDone.add(points);
+        remainingPoints.subtract(points);
+    }
+
     public int getRemainingPoints() {
-        return totalPoints - pointsDone;
+        return remainingPoints.getPoints();
     }
 
     @Override

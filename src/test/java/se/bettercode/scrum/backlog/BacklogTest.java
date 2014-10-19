@@ -56,7 +56,7 @@ public class BacklogTest {
         backlog.addStory(new Story(5));
         backlog.addStory(new Story(7));
         Story story = backlog.getStory();
-        int work = story.getTotalPoints();
+        int work = story.getTotalPoints().getPoints();
         story.workOnStory(work, 1);
         assertEquals(work, backlog.getFinishedPoints());
     }
@@ -81,7 +81,7 @@ public class BacklogTest {
         backlog.addStory(new Story(5));
         backlog.addStory(new Story(7));
         Story story = backlog.getStory();
-        int work = story.getTotalPoints() - 1;
+        int work = story.getTotalPoints().getPoints() - 1;
         story.workOnStory(work, 1);
         assertEquals(work, backlog.getWorkInProgressPoints());
         assertEquals(0, backlog.getFinishedPoints());

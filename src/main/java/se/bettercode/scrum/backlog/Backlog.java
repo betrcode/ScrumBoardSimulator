@@ -64,7 +64,7 @@ public class Backlog {
     }
 
     public int getTotalPoints() {
-        return stories.stream().mapToInt(Story::getTotalPoints).sum();
+        return stories.stream().mapToInt(Story::getTotalPointsAsInt).sum();
     }
 
     public int getWorkInProgressPoints() {
@@ -76,7 +76,7 @@ public class Backlog {
     }
 
     private int getPointsPerState(Story.StoryState filter) {
-        return getStories(filter).stream().mapToInt(Story::getPointsDone).sum();
+        return getStories(filter).stream().mapToInt(Story::getPointsDoneAsInt).sum();
     }
 
     public boolean isFinished() {

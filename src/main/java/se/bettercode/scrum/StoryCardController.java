@@ -39,7 +39,8 @@ public class StoryCardController extends BorderPane {
             throw new RuntimeException(exception);
         }
         storyTitle.setText(story.getTitle());
-        storyPoints.setText(Integer.toString(story.getPointsDone()) + "/" + Integer.toString(story.getTotalPoints()));
+        storyPoints.setText(Integer.toString(story.getPointsDone().getPoints()) +
+                "/" + Integer.toString(story.getTotalPoints().getPoints()));
         setPrefHeight(getHeightBasedOnStoryPoints());
     }
 
@@ -52,9 +53,9 @@ public class StoryCardController extends BorderPane {
     }
 
     private double getHeightBasedOnStoryPoints() {
-        if (story.getTotalPoints() > MEDIUM_STORY_POINTS) {
+        if (story.getTotalPoints().getPoints() > MEDIUM_STORY_POINTS) {
             return 110;
-        } else if (story.getTotalPoints() < MEDIUM_STORY_POINTS) {
+        } else if (story.getTotalPoints().getPoints() < MEDIUM_STORY_POINTS) {
             return 45;
         } else {
             return 80;

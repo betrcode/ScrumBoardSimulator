@@ -17,12 +17,12 @@ public class StoryTest {
 
     @Test
     public void testGetTotalPoints() throws Exception {
-        assertEquals(5, story.getTotalPoints());
+        assertEquals(5, story.getTotalPoints().getPoints());
     }
 
     @Test
     public void testGetPointsDone() throws Exception {
-        assertEquals(0, story.getPointsDone());
+        assertEquals(0, story.getPointsDone().getPoints());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class StoryTest {
         int remainingPoints = story.workOnStory(3, 1);
         assertEquals(0, remainingPoints);
         assertEquals(Story.StoryState.STARTED, story.getStatus());
-        assertEquals(3, story.getPointsDone());
+        assertEquals(3, story.getPointsDone().getPoints());
         assertEquals(2, story.getRemainingPoints());
     }
 
@@ -44,7 +44,7 @@ public class StoryTest {
         int remainingPoints = story.workOnStory(5, 1);
         assertEquals(0, remainingPoints);
         assertEquals(Story.StoryState.FINISHED, story.getStatus());
-        assertEquals(5, story.getPointsDone());
+        assertEquals(5, story.getPointsDone().getPoints());
         assertEquals(story.getTotalPoints(), story.getPointsDone());
         assertEquals(0, story.getRemainingPoints());
     }
@@ -53,7 +53,7 @@ public class StoryTest {
     public void testWorkOnStoryUntilOverCompleted() throws Exception {
         int remainingPoints = story.workOnStory(7, 1);
         assertEquals(Story.StoryState.FINISHED, story.getStatus());
-        assertEquals(5, story.getPointsDone());
+        assertEquals(5, story.getPointsDone().getPoints());
         assertEquals(story.getTotalPoints(), story.getPointsDone());
         assertEquals(0, story.getRemainingPoints());
         assertEquals(2, remainingPoints);
@@ -64,7 +64,7 @@ public class StoryTest {
         story.workOnStory(3, 1);
         story.workOnStory(1, 2);
         assertEquals(Story.StoryState.STARTED, story.getStatus());
-        assertEquals(4, story.getPointsDone());
+        assertEquals(4, story.getPointsDone().getPoints());
         assertEquals(1, story.getRemainingPoints());
     }
 
