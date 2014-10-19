@@ -1,4 +1,4 @@
-package se.bettercode.scrum;
+package se.bettercode.scrum.team;
 
 import org.junit.Test;
 import se.bettercode.scrum.team.Team;
