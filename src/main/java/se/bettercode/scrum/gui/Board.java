@@ -5,7 +5,6 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
 import se.bettercode.scrum.backlog.Backlog;
 import se.bettercode.scrum.Story;
@@ -14,20 +13,17 @@ import se.bettercode.scrum.StoryCardController;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.Thread.sleep;
-
 public class Board extends GridPane {
 
     private Backlog backlog;
     private final VBox todoColumn = new VBox(10);
     private final VBox startedColumn = new VBox(10);
     private final VBox doneColumn = new VBox(10);
-    private final AudioClip ding;
+    private final DingAudioClip dingAudioClip = new DingAudioClip();
 
     public Board() {
         setPadding(new Insets(10));
 
-        ding = new AudioClip(getClass().getResource("/bell.wav").toString());
         int i = 0;
         for (VBox columnBox : columns()) {
             ColumnConstraints constraints = new ColumnConstraints();
@@ -48,24 +44,10 @@ public class Board extends GridPane {
         for (Story story : backlog.getStories()) {
             story.statusProperty().addListener((observable, oldValue, newValue) -> {
                 updateBoard();
-                playDingIfDone(story);
+                dingAudioClip.playIfDone(story);
             });
         }
         updateBoard();
-    }
-
-    private void playDingIfDone(Story story) {
-        if (story.getStatus() == Story.StoryState.FINISHED) {
-            for (int i=0; i < story.getTotalPoints(); i++) {
-                ding.stop();
-                ding.play(1.0);
-                try {
-                    sleep(250 + i * 20);
-                } catch (InterruptedException e) {
-
-                }
-            }
-        }
     }
 
     private void updateBoard() {
