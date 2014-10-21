@@ -70,7 +70,7 @@ public class Story {
         }
 
         int leftover = 0;
-        int pointsToApply = 0;
+        int pointsToApply;
 
         if (points >= getRemainingPoints()) {
             pointsToApply = getRemainingPoints();
