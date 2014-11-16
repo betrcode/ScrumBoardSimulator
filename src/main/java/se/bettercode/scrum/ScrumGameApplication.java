@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import se.bettercode.scrum.backlog.Backlog;
 import se.bettercode.scrum.backlog.SelectableBacklogs;
 import se.bettercode.scrum.gui.Board;
+import se.bettercode.scrum.gui.BurnupChart;
 import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;
 import se.bettercode.scrum.prefs.StageUserPrefs;
@@ -26,6 +27,7 @@ public class ScrumGameApplication extends Application {
     private SelectableBacklogs backlogs = new SelectableBacklogs();
     private SelectableTeams teams = new SelectableTeams();
     private ToolBar toolBar = new ToolBar(teams.getKeys(), backlogs.getKeys());
+    private BurnupChart burnupChart = new BurnupChart();
     private Stage primaryStage;
     private StageUserPrefs prefs;
 
@@ -55,6 +57,7 @@ public class ScrumGameApplication extends Application {
         BorderPane borderPane = new BorderPane();
         board.prefWidthProperty().bind(primaryStage.widthProperty());
         borderPane.setCenter(board);
+        borderPane.setRight(burnupChart);
         borderPane.setTop(toolBar);
         borderPane.setBottom(statusBar);
         primaryStage.setScene(new Scene(borderPane, 800, 600));
