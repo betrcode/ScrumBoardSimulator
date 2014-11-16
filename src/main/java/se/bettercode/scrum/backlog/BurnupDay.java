@@ -3,11 +3,11 @@ package se.bettercode.scrum.backlog;
 import lombok.Data;
 
 @Data
-class BurnupDay {
+public class BurnupDay {
 
     private int day, total, done;
 
-    BurnupDay(int day, int total, int done) {
+    public BurnupDay(int day, int total, int done) {
         if (done > total) {
             throw new IllegalArgumentException("done " + done + " must not be larger than total " + total);
         }
