@@ -19,6 +19,8 @@ import se.bettercode.scrum.team.Team;
 
 public class ScrumGameApplication extends Application {
 
+    private static final int SPRINT_LENGTH_IN_DAYS = 10;
+
     private Board board = new Board();
     private Sprint sprint;
     private Team team;
@@ -27,7 +29,7 @@ public class ScrumGameApplication extends Application {
     private SelectableBacklogs backlogs = new SelectableBacklogs();
     private SelectableTeams teams = new SelectableTeams();
     private ToolBar toolBar = new ToolBar(teams.getKeys(), backlogs.getKeys());
-    private BurnupChart burnupChart = new BurnupChart();
+    private BurnupChart burnupChart = new BurnupChart(SPRINT_LENGTH_IN_DAYS);
     private Stage primaryStage;
     private StageUserPrefs prefs;
 
@@ -65,8 +67,7 @@ public class ScrumGameApplication extends Application {
 
     private boolean initSprint() {
         if (team != null && backlog != null) {
-            final int LENGTH_IN_DAYS = 10;
-            sprint = new Sprint("First sprint", LENGTH_IN_DAYS, team, backlog);
+            sprint = new Sprint("First sprint", SPRINT_LENGTH_IN_DAYS, team, backlog);
             board.bindBacklog(backlog);
             burnupChart.bindBurnupDaysProperty(backlog.getBurnup().burnupDaysProperty());
             toolBar.bindRunningProperty(sprint.runningProperty());

@@ -14,18 +14,18 @@ public class BurnupChart extends AreaChart<Number, Number> {
     XYChart.Series totalSeries = new XYChart.Series();
     XYChart.Series doneSeries = new XYChart.Series();
     static final double lowerBound = 0;
-    static final double yUpperBound = 12;
+    static final double yUpperBound = 12; //TODO: Make to backlog size in points?
     static final double tickUnit = 1;
 
-    public BurnupChart() {
-        super(new NumberAxis(lowerBound, yUpperBound, tickUnit), new NumberAxis());
+    public BurnupChart(int xUpperBound) {
+        super(new NumberAxis(lowerBound, xUpperBound, tickUnit), new NumberAxis(lowerBound, yUpperBound, tickUnit));
         getYAxis().setLabel("Points");
-        getYAxis().setTickLength(1);
         getXAxis().setLabel("Days");
         setTitle("Burnup");
 
         totalSeries.setName("Total");
         doneSeries.setName("Done");
+
 
         getData().addAll(doneSeries, totalSeries);
 
