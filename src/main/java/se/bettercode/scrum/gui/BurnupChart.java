@@ -14,7 +14,7 @@ public class BurnupChart extends AreaChart<Number, Number> {
     XYChart.Series totalSeries = new XYChart.Series();
     XYChart.Series doneSeries = new XYChart.Series();
     static final double lowerBound = 0;
-    static final double yUpperBound = 12; //TODO: Make to backlog size in points?
+    static final double yUpperBound = 26; //TODO: Make to backlog size in points?
     static final double tickUnit = 1;
 
     public BurnupChart(int xUpperBound) {

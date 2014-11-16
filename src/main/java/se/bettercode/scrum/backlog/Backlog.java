@@ -109,7 +109,7 @@ public class Backlog {
 
         setFinishedPoints();
         setAverageLeadTime();
-        burnup.addDay(makeBurnupDay(day));
+        addBurnupDay(day);
     }
 
     private BurnupDay makeBurnupDay(int day) {
@@ -134,6 +134,10 @@ public class Backlog {
 
     private void setFinishedPoints() {
         Platform.runLater(() -> donePoints.set(getFinishedPoints()));
+    }
+
+    private void addBurnupDay(int day) {
+        Platform.runLater(() -> burnup.addDay(makeBurnupDay(day)));
     }
 
     public BacklogBurnup getBurnup() {
