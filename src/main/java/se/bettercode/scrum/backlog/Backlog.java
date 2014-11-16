@@ -18,6 +18,7 @@ public class Backlog {
     List<Story> stories = new ArrayList<>();
     IntegerProperty donePoints = new SimpleIntegerProperty(0);
     private DoubleProperty averageLeadTime = new SimpleDoubleProperty();
+    private BacklogBurnup burnup = new BacklogBurnup();
 
     protected Backlog(String name) {
         this.name = name;
@@ -107,6 +108,11 @@ public class Backlog {
 
         setFinishedPoints();
         setAverageLeadTime();
+        burnup.addDay(makeBurnupDay(day));
+    }
+
+    private BurnupDay makeBurnupDay(int day) {
+        return new BurnupDay(day, getTotalPoints(), getDonePoints());
     }
 
     private void setAverageLeadTime() {
