@@ -16,6 +16,9 @@ unplanned work and see how it affects the Sprint and how much waste is created.
 ## Continuous Integration
 [http://jenkins.crisp.se/job/ScrumBoardSimulator/](http://jenkins.crisp.se/job/ScrumBoardSimulator/)
 
+## Non-standard IntelliJ plugins used
+* Lombok
+
 ## Copyright
 All rights reserved at this point. Have not decided what to do with this yet.
 
