@@ -7,7 +7,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import se.bettercode.scrum.backlog.Backlog;
 import se.bettercode.scrum.team.Team;
-import se.bettercode.scrum.team.TeamImpl;
 
 public class Sprint {
 

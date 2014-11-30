@@ -4,17 +4,17 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class TeamImplTest {
+public class TeamTest {
 
     @Test
     public void testToString() {
-        TeamImpl team = new TeamImpl("Dingos", 17);
+        Team team = new TeamImpl("Dingos", 17);
         assertEquals("Team{name=Dingos, velocity=17, WIP limit=1}", team.toString());
     }
 
     @Test
     public void testDefaultVelocity() {
-        TeamImpl team = new TeamImpl("Rhinos", 10);
+        Team team = new TeamImpl("Rhinos", 10);
         assertEquals(1, team.getWorkInProgressLimit());
     }
 

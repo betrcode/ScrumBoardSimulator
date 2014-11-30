@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import se.bettercode.scrum.backlog.Backlog;
 import se.bettercode.scrum.backlog.SmallBacklog;
+import se.bettercode.scrum.team.Team;
 import se.bettercode.scrum.team.TeamImpl;
 
 import static org.junit.Assert.assertEquals;
@@ -12,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class SprintTest {
 
     Sprint sprint;
-    TeamImpl team;
+    Team team;
     Backlog backlog;
 
     @Before
