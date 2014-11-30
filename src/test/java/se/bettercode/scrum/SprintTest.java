@@ -5,19 +5,19 @@ import org.junit.Before;
 import org.junit.Test;
 import se.bettercode.scrum.backlog.Backlog;
 import se.bettercode.scrum.backlog.SmallBacklog;
-import se.bettercode.scrum.team.Team;
+import se.bettercode.scrum.team.TeamImpl;
 
 import static org.junit.Assert.assertEquals;
 
 public class SprintTest {
 
     Sprint sprint;
-    Team team;
+    TeamImpl team;
     Backlog backlog;
 
     @Before
     public void setUp() {
-        team = new Team("Rock Stars", 23);
+        team = new TeamImpl("Rock Stars", 23);
         backlog = new SmallBacklog();
         sprint = new Sprint("First Sprint", 10, team, backlog);
     }

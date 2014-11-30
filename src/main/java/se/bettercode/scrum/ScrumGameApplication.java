@@ -14,7 +14,7 @@ import se.bettercode.scrum.gui.StatusBar;
 import se.bettercode.scrum.gui.ToolBar;
 import se.bettercode.scrum.prefs.StageUserPrefs;
 import se.bettercode.scrum.team.SelectableTeams;
-import se.bettercode.scrum.team.Team;
+import se.bettercode.scrum.team.TeamImpl;
 
 
 public class ScrumGameApplication extends Application {
@@ -23,7 +23,7 @@ public class ScrumGameApplication extends Application {
 
     private Board board = new Board();
     private Sprint sprint;
-    private Team team;
+    private TeamImpl team;
     private Backlog backlog;
     private StatusBar statusBar = new StatusBar();
     private SelectableBacklogs backlogs = new SelectableBacklogs();

@@ -1,26 +1,25 @@
 package se.bettercode.scrum.team;
 
 import org.junit.Test;
-import se.bettercode.scrum.team.Team;
 
 import static org.junit.Assert.assertEquals;
 
-public class TeamTest {
+public class TeamImplTest {
 
     @Test
     public void testToString() {
-        Team team = new Team("Dingos", 17);
+        TeamImpl team = new TeamImpl("Dingos", 17);
         assertEquals("Team{name=Dingos, velocity=17, WIP limit=1}", team.toString());
     }
 
     @Test
     public void testDefaultVelocity() {
-        Team team = new Team("Rhinos", 10);
+        TeamImpl team = new TeamImpl("Rhinos", 10);
         assertEquals(1, team.getWorkInProgressLimit());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidWIPLimit() {
-        new Team("Monkeys", 20, 0);
+        new TeamImpl("Monkeys", 20, 0);
     }
 }
