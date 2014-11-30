@@ -69,6 +69,7 @@ public class ScrumGameApplication extends Application {
         if (team != null && backlog != null) {
             sprint = new Sprint("First sprint", SPRINT_LENGTH_IN_DAYS, team, backlog);
             board.bindBacklog(backlog);
+            burnupChart.removeAllData();
             burnupChart.bindBurnupDaysProperty(backlog.getBurnup().burnupDaysProperty());
             toolBar.bindRunningProperty(sprint.runningProperty());
             return true;

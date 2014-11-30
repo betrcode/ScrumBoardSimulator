@@ -47,6 +47,14 @@ public class BurnupChart extends AreaChart<Number, Number> {
         });
     }
 
+    public void removeAllData() {
+        System.out.println("Removing all chart data...");
+        //getData().get(0).getData().removeAll();
+        //getData().get(1).getData().removeAll();
+        getData().removeAll(totalSeries.getData());
+        getData().removeAll(doneSeries.getData());
+    }
+
     private Data makeTotalSeriesData(BurnupDay burnupDay) {
         return new Data(burnupDay.getDay(), burnupDay.getTotal());
     }
