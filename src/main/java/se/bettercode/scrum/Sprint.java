@@ -6,6 +6,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import se.bettercode.scrum.backlog.Backlog;
+import se.bettercode.scrum.team.Team;
 import se.bettercode.scrum.team.TeamImpl;
 
 public class Sprint {
@@ -13,12 +14,12 @@ public class Sprint {
     public static final int SLEEP_MILLIS = 500;
     private String name;
     private IntegerProperty lengthInDays = new SimpleIntegerProperty(0);
-    private TeamImpl team;
+    private Team team;
     private Backlog backlog;
     private IntegerProperty currentDay = new SimpleIntegerProperty(0);
     private BooleanProperty running = new SimpleBooleanProperty(false);
 
-    public Sprint(String name, int lengthInDays, TeamImpl team, Backlog backlog) {
+    public Sprint(String name, int lengthInDays, Team team, Backlog backlog) {
         this.name = name;
         this.lengthInDays.set(lengthInDays);
         this.team = team;
