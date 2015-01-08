@@ -2,7 +2,7 @@ package se.bettercode.scrum.gui;
 
 import javafx.application.Platform;
 import javafx.beans.property.ListProperty;
-import javafx.collections.ListChangeListener;
+import javafx.collections.ListChangeListener.Change;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -32,17 +32,16 @@ public class BurnupChart extends AreaChart<Number, Number> {
     }
 
     public void bindBurnupDaysProperty(ListProperty<BurnupDay> burnupDays) {
-        burnupDays.get().addListener(new ListChangeListener<BurnupDay>() {
-            @Override
-            public void onChanged(Change<? extends BurnupDay> c) {
-                Platform.runLater(() -> {
-                    while (c.next()) {
-                        for (BurnupDay burnupDay : c.getAddedSubList()) {
-                            getData().get(0).getData().add(makeDoneSeriesData(burnupDay));
-                            getData().get(1).getData().add(makeTotalSeriesData(burnupDay));
-                        }
-                    }
-                });
+        burnupDays.get().addListener((Change<? extends BurnupDay> c) -> addBurnupData(c));
+    }
+
+    private void addBurnupData(Change<? extends BurnupDay> c) {
+        Platform.runLater(() -> {
+            while (c.next()) {
+                for (BurnupDay burnupDay : c.getAddedSubList()) {
+                    getData().get(0).getData().add(makeDoneSeriesData(burnupDay));
+                    getData().get(1).getData().add(makeTotalSeriesData(burnupDay));
+                }
             }
         });
     }
