@@ -15,7 +15,7 @@ unplanned work and see how it affects the Sprint and how much waste is created.
 
 ## Continuous Integration
 [http://jenkins.crisp.se/job/ScrumBoardSimulator/](http://jenkins.crisp.se/job/ScrumBoardSimulator/)
-This job is triggered automatically by a Jenkins hook on BitBucket. (hopefully #8)
+This job is triggered automatically by a Jenkins hook on BitBucket.
 
 ## Non-standard IntelliJ plugins used
 * Lombok
