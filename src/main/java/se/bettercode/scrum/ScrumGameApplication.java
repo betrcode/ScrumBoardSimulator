@@ -29,10 +29,10 @@ public class ScrumGameApplication extends Application {
     private SelectableBacklogs backlogs = new SelectableBacklogs();
     private SelectableTeams teams = new SelectableTeams();
     private ToolBar toolBar = new ToolBar(teams.getKeys(), backlogs.getKeys());
-    private BurnupChart burnupChart = new BurnupChart(SPRINT_LENGTH_IN_DAYS);
+    private BurnupChart burnupChart = getNewBurnupChart();
     private Stage primaryStage;
     private StageUserPrefs prefs;
-
+    
     public static void main(String[] args) {
         System.out.println("Launching JavaFX application.");
         launch(args);
@@ -70,6 +70,7 @@ public class ScrumGameApplication extends Application {
             sprint = new Sprint("First sprint", SPRINT_LENGTH_IN_DAYS, team, backlog);
             board.bindBacklog(backlog);
             burnupChart.removeAllData();
+            //burnupChart = getNewBurnupChart();
             burnupChart.bindBurnupDaysProperty(backlog.getBurnup().burnupDaysProperty());
             toolBar.bindRunningProperty(sprint.runningProperty());
             return true;
@@ -119,4 +120,7 @@ public class ScrumGameApplication extends Application {
         prefs.save();
     }
 
+    private BurnupChart getNewBurnupChart() {
+        return new BurnupChart(SPRINT_LENGTH_IN_DAYS);
+    }
 }

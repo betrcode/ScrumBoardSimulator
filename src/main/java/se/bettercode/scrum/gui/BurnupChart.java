@@ -11,8 +11,8 @@ import se.bettercode.scrum.backlog.BurnupDay;
 
 public class BurnupChart extends AreaChart<Number, Number> {
 
-    XYChart.Series totalSeries = new XYChart.Series();
-    XYChart.Series doneSeries = new XYChart.Series();
+    XYChart.Series totalSeries;
+    XYChart.Series doneSeries;
     static final double lowerBound = 0;
     static final double yUpperBound = 26; //TODO: Make to backlog size in points?
     static final double tickUnit = 1;
@@ -23,11 +23,9 @@ public class BurnupChart extends AreaChart<Number, Number> {
         getXAxis().setLabel("Days");
         setTitle("Burnup");
 
+        initChart();
         totalSeries.setName("Total");
         doneSeries.setName("Done");
-
-
-        getData().addAll(doneSeries, totalSeries);
 
     }
 
@@ -48,10 +46,14 @@ public class BurnupChart extends AreaChart<Number, Number> {
 
     public void removeAllData() {
         System.out.println("Removing all chart data...");
-        //getData().get(0).getData().removeAll();
-        //getData().get(1).getData().removeAll();
-        getData().removeAll(totalSeries.getData());
-        getData().removeAll(doneSeries.getData());
+        initChart();
+    }
+
+    private void initChart() {
+        getData().clear();
+        totalSeries = new Series();
+        doneSeries = new Series();
+        getData().addAll(doneSeries, totalSeries);
     }
 
     private Data makeTotalSeriesData(BurnupDay burnupDay) {
