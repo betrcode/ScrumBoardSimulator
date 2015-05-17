@@ -3,6 +3,8 @@ or: Scrum Game. It is a simulation of a Scrum Board where the idea is that you c
 team, team velocity, sprint length, stories and story sizes, work-in-progress limits and random disasters such as
 unplanned work and see how it affects the Sprint and how much waste is created.
 
+The application is built using JavaFX.
+
 ## Prerequisites for development
 * Java 8
 * Maven 3
