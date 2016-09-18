@@ -16,8 +16,8 @@ The application is built using JavaFX.
 * Launching jar from command line: ```java -jar target/ScrumBoardSimulator-1.0-SNAPSHOT.jar```
 
 ## Continuous Integration
-[http://jenkins.crisp.se/job/ScrumBoardSimulator/](http://jenkins.crisp.se/job/ScrumBoardSimulator/)
-This job is triggered automatically by a Jenkins hook on BitBucket.
+[http://jenkins2.crisp.se/job/betrcode/job/ScrumBoardSimulator/](http://jenkins2.crisp.se/job/betrcode/job/ScrumBoardSimulator/)
+This job is triggered automatically by a Jenkins hook on GitHub.
 
 ## Non-standard IntelliJ plugins used
 * Lombok
